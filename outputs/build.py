@@ -19,8 +19,8 @@ import re
 import sys
 from pathlib import Path
 
-SCSS_DIR = Path(__file__).parent / "scss"
-OUT_FILE = Path(__file__).parent / "assets" / "css" / "style.css"
+SCSS_DIR = Path(__file__).parent
+OUT_FILE = Path(__file__).parent.parent / "web" / "assets" / "style.css"
 
 
 def strip_comments(text):
