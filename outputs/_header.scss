@@ -1,0 +1,159 @@
+// ---------------------------------------------
+// Site header
+// ---------------------------------------------
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 1.6rem 0;
+  transition: background $speed $ease, padding $speed $ease, box-shadow $speed $ease;
+}
+
+.site-header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.site-header.is-scrolled {
+  background: rgba(249, 249, 249, 0.92);
+  backdrop-filter: blur(10px);
+  padding: 1rem 0;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);
+}
+
+.site-header .logo {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.site-header .logo img {
+  height: 40px;
+  width: auto;
+  transition: filter $speed $ease;
+}
+
+.site-header.is-scrolled .logo img,
+.site-header.menu-open .logo img {
+  filter: none;
+}
+
+// hero sits behind a translucent header — logo starts white/inverted
+.site-header:not(.is-scrolled):not(.menu-open) .logo img {
+  filter: brightness(0) invert(1);
+}
+
+.hamburger {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  position: relative;
+  z-index: 210;
+  transition: border-color $speed $ease, background $speed $ease;
+}
+
+.hamburger span {
+  width: 18px;
+  height: 2px;
+  background: $color-white;
+  display: block;
+  transition: transform $speed $ease, opacity $speed $ease, background $speed $ease;
+}
+
+.site-header.is-scrolled .hamburger {
+  border-color: rgba(0, 0, 0, 0.25);
+}
+
+.site-header.is-scrolled .hamburger span {
+  background: $color-dark;
+}
+
+.site-header.menu-open .hamburger {
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+.site-header.menu-open .hamburger span {
+  background: $color-white;
+}
+
+.site-header.menu-open .hamburger span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.site-header.menu-open .hamburger span:nth-child(2) {
+  opacity: 0;
+}
+
+.site-header.menu-open .hamburger span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+// Full-screen nav overlay
+.nav-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: $color-dark;
+  color: $color-white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s $ease, visibility 0.5s $ease;
+}
+
+.nav-overlay.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.nav-overlay .container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 3.2rem;
+}
+
+.nav-overlay__links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.nav-overlay__links a {
+  font-size: clamp(2.2rem, 6vw, 3.6rem);
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.5);
+  transition: color $speed $ease, padding-left $speed $ease;
+  display: inline-block;
+}
+
+.nav-overlay__links a:hover {
+  color: $color-white;
+  padding-left: 0.5rem;
+}
+
+.nav-overlay__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3rem;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 0.95rem;
+}
+
+.nav-overlay__meta strong {
+  display: block;
+  color: $color-white;
+  font-size: 1.1rem;
+  margin-bottom: 0.3rem;
+}

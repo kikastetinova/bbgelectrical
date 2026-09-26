@@ -1,0 +1,56 @@
+// ---------------------------------------------
+// Split intro (heading + copy + buttons | image)
+// ---------------------------------------------
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 6vw, 5rem);
+  align-items: center;
+}
+
+.split__media {
+  border-radius: $radius-lg 0 0 0;
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+}
+
+.split__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.split__content .heading-xl {
+  margin-bottom: 0;
+}
+
+// Three-up feature grid: image + caption (Certified / Modern / Award)
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1.5rem, 4vw, 2.5rem);
+  margin-top: clamp(3rem, 6vw, 4.5rem);
+}
+
+.feature-card__media {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: $radius-md;
+}
+
+.feature-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s $ease;
+}
+
+.feature-card:hover .feature-card__media img {
+  transform: scale(1.05);
+}
+
+.feature-card h3 {
+  margin-top: 1.2rem;
+  font-size: 1.2rem;
+  font-weight: 500;
+}

@@ -1,0 +1,40 @@
+// ---------------------------------------------
+// Design tokens
+// ---------------------------------------------
+
+// Colour palette (matched to the reference site: off-white body, warm
+// cream section backgrounds, near-black text/footer, one electrical-amber
+// accent used sparingly for BBG's own identity)
+$color-bg:          #f9f9f9;
+$color-bg-cream:    #f4f1ec;
+$color-bg-cream-2:  #efece5;
+$color-dark:        #1c1c1c;
+$color-dark-soft:   #212121;
+$color-text:        #4a4a4a;
+$color-text-light:  #6f6f6f;
+$color-heading:     #232323;
+$color-border:      #e2ddd3;
+$color-white:       #ffffff;
+$color-accent:      #d97f2c; // electrical amber, used sparingly
+
+// Type
+$font-body: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+$font-script: "Caveat", cursive;
+
+// Layout
+$container-width: 1240px;
+$container-pad: 6vw;
+$radius-lg: 120px;
+$radius-md: 28px;
+$radius-sm: 16px;
+$radius-pill: 100px;
+
+// Transitions
+$ease: cubic-bezier(0.65, 0, 0.35, 1);
+$speed: 0.4s;
+
+// Breakpoints (used manually inside @media blocks — the compiler here
+// doesn't support mixins, so these are just reference numbers)
+// mobile:  < 640px
+// tablet:  < 960px
+// desktop: < 1200px

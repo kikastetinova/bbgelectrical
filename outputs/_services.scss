@@ -1,0 +1,46 @@
+// ---------------------------------------------
+// Services list (Commercial Fitouts / Switchboards / Workshops)
+// ---------------------------------------------
+.services-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1.5rem;
+  margin-bottom: clamp(2.5rem, 5vw, 3.5rem);
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+.service-card__media {
+  aspect-ratio: 4 / 3;
+  border-radius: $radius-md;
+  overflow: hidden;
+}
+
+.service-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s $ease;
+}
+
+.service-card:hover .service-card__media img {
+  transform: scale(1.06);
+}
+
+.service-card h3 {
+  margin-top: 1.3rem;
+  font-size: 1.3rem;
+  font-weight: 500;
+}
+
+.service-card p {
+  margin-top: 0.5rem;
+  font-size: 0.95rem;
+  color: $color-text-light;
+}

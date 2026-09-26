@@ -1,0 +1,86 @@
+// ---------------------------------------------
+// Hero
+// ---------------------------------------------
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-end;
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.05) 35%, rgba(0, 0, 0, 0.65) 100%);
+  z-index: 1;
+}
+
+.hero .container {
+  position: relative;
+  z-index: 2;
+  padding-bottom: 4.5rem;
+  width: 100%;
+}
+
+.hero__heading {
+  color: $color-white;
+  font-size: clamp(2.6rem, 6.5vw, 4rem);
+  font-weight: 600;
+  max-width: 16ch;
+  line-height: 1.08;
+}
+
+.hero__tags {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  margin-top: 2.4rem;
+  color: $color-white;
+  font-size: 1rem;
+  flex-wrap: wrap;
+}
+
+.hero__tags span.sep {
+  width: 1px;
+  height: 16px;
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.hero__tags .rule {
+  flex: 1;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.35);
+  min-width: 60px;
+}
+
+.hero__scroll {
+  position: absolute;
+  bottom: 2.4rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: bob 2.4s ease-in-out infinite;
+}
+
+.hero__scroll span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: $color-white;
+}
+
+@keyframes bob {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(6px); }
+}
