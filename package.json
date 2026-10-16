@@ -1,0 +1,25 @@
+{
+  "name": "bbgwebsite",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/kikastetinova/bbgelectrical#readme",
+  "bugs": {
+    "url": "https://github.com/kikastetinova/bbgelectrical/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kikastetinova/bbgelectrical.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build-css": "sass styles/main.scss assets/style.css",
+    "watch-css": "sass --watch styles/main.scss assets/style.css"
+  },
+  "dependencies": {
+    "sass": "^1.105.2"
+  }
+}

@@ -22,12 +22,15 @@ $font-body: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", 
 $font-script: "Caveat", cursive;
 
 // Layout
-$container-width: 1240px;
+$container-width: 1600px;
 $container-pad: 6vw;
 $radius-lg: 120px;
 $radius-md: 28px;
 $radius-sm: 16px;
-$radius-pill: 100px;
+$radius-pill: $radius-sm;
+
+$radius-first: 0 0 0 $radius-pill;
+$radius-last: 0 $radius-pill 0 0;
 
 // Transitions
 $ease: cubic-bezier(0.65, 0, 0.35, 1);

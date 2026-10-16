@@ -57,29 +57,6 @@
   min-width: 60px;
 }
 
-.hero__scroll {
-  position: absolute;
-  bottom: 2.4rem;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 2;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.18);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  animation: bob 2.4s ease-in-out infinite;
-}
-
-.hero__scroll span {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: $color-white;
-}
-
 @keyframes bob {
   0%, 100% { transform: translateX(-50%) translateY(0); }
   50% { transform: translateX(-50%) translateY(6px); }

@@ -4,6 +4,7 @@
 .intro {
   position: relative;
   text-align: center;
+  padding: 4rem;
 }
 
 .intro__watermark {
@@ -94,9 +95,9 @@
 .arch-media {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 8;
+  aspect-ratio: 12 / 8;
   overflow: hidden;
-  border-radius: 0 0 $radius-lg 0;
+  // border-radius: 0 0 $radius-lg 0;
 }
 
 .arch-media img {

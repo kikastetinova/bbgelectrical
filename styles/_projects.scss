@@ -17,7 +17,6 @@
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
   padding-bottom: 1rem;
-  margin: 0 calc(-1 * $container-pad);
   padding-left: $container-pad;
   padding-right: $container-pad;
   -ms-overflow-style: none;
@@ -35,7 +34,7 @@
 
 .project-card__media {
   aspect-ratio: 4 / 3;
-  border-radius: $radius-md 0 $radius-md 0;
+  //border-radius: $radius-md 0 $radius-md 0;
   overflow: hidden;
 }
 

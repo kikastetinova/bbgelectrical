@@ -6,7 +6,6 @@
   align-items: center;
   gap: 0.9rem;
   padding: 1.05rem 1.7rem;
-  border-radius: $radius-pill;
   font-size: 0.95rem;
   font-weight: 600;
   white-space: nowrap;
@@ -56,9 +55,17 @@
 
 .btn-row {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 1rem;
   margin-top: 2.2rem;
+}
+
+.btn-row .btn:last-child {
+    border-radius: $radius-last;
+}
+
+.btn-row .btn:first-child {
+    border-radius: $radius-first;
 }
 
 .icon-circle {
