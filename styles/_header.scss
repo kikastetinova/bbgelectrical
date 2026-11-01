@@ -32,7 +32,7 @@
 }
 
 .site-header .logo img {
-  height: 40px;
+  height: 80px;
   width: auto;
   transition: filter $speed $ease;
 }
@@ -99,10 +99,28 @@
   visibility: hidden;
 }
 
-@media (min-width: 1200px) {
-  .main-nav {
-    display: block;
-  }
+// Phone number — replaces the hamburger on large screens (>= 1200px)
+.header-phone {
+  display: none;
+  margin-left: auto;
+  font-size: 1rem;
+  font-weight: 700;
+  color: $color-white;
+  transition: color $speed $ease;
+}
+
+.header-phone:hover,
+.header-phone:focus-visible {
+  color: $color-accent;
+}
+
+.site-header.is-scrolled .header-phone {
+  color: $color-dark;
+}
+
+.site-header.is-scrolled .header-phone:hover,
+.site-header.is-scrolled .header-phone:focus-visible {
+  color: $color-accent;
 }
 
 .hamburger {
@@ -215,4 +233,16 @@
   color: $color-white;
   font-size: 1.1rem;
   margin-bottom: 0.3rem;
+}
+
+// Large screens and up: show main menu + phone, hide hamburger
+@media (min-width: 1200px) {
+  .main-nav,
+  .header-phone {
+    display: block;
+  }
+
+  .hamburger {
+    display: none;
+  }
 }
