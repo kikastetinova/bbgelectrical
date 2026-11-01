@@ -37,10 +37,19 @@
     header && header.classList.toggle("menu-open", isOpen);
     navToggle && navToggle.setAttribute("aria-expanded", String(isOpen));
     document.body.style.overflow = isOpen ? "hidden" : "";
+    if (isOpen && navClose) navClose.focus();
   }
 
   if (navToggle) {
     navToggle.addEventListener("click", toggleNav);
+  }
+
+  var navClose = document.getElementById("navClose");
+  if (navClose) {
+    navClose.addEventListener("click", function () {
+      closeNav();
+      navToggle && navToggle.focus();
+    });
   }
 
   if (navOverlay) {

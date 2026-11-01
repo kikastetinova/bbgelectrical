@@ -189,9 +189,52 @@
   transition: opacity 0.5s $ease, visibility 0.5s $ease;
 }
 
+// Close button row — mirrors the header row so the cross sits exactly
+// where the hamburger was
+.nav-overlay__top {
+  position: absolute;
+  top: 1.6rem;
+  left: 0;
+  right: 0;
+  height: 80px; // logo height
+  max-width: $container-width;
+  margin: 0 auto;
+  padding: 0 $container-pad;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.nav-close {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: $color-white;
+  transition: background $speed $ease, color $speed $ease, transform $speed $ease;
+}
+
+.nav-close svg {
+  width: 20px;
+  height: 20px;
+}
+
+.nav-close:hover,
+.nav-close:focus-visible {
+  background: $color-white;
+  color: $color-dark;
+  transform: rotate(90deg);
+}
+
 .nav-overlay.is-open {
   opacity: 1;
   visibility: visible;
+  // become visible immediately on open (so the close button can take focus);
+  // the 0.5s visibility delay above still applies when closing
+  transition: opacity 0.5s $ease, visibility 0s;
 }
 
 .nav-overlay .container {

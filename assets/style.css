@@ -462,9 +462,48 @@ h1, h2, h3, h4 {
   transition: opacity 0.5s cubic-bezier(0.65, 0, 0.35, 1), visibility 0.5s cubic-bezier(0.65, 0, 0.35, 1);
 }
 
+.nav-overlay__top {
+  position: absolute;
+  top: 1.6rem;
+  left: 0;
+  right: 0;
+  height: 80px;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 6vw;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.nav-close {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  transition: background 0.4s cubic-bezier(0.65, 0, 0.35, 1), color 0.4s cubic-bezier(0.65, 0, 0.35, 1), transform 0.4s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.nav-close svg {
+  width: 20px;
+  height: 20px;
+}
+
+.nav-close:hover,
+.nav-close:focus-visible {
+  background: #ffffff;
+  color: #1c1c1c;
+  transform: rotate(90deg);
+}
+
 .nav-overlay.is-open {
   opacity: 1;
   visibility: visible;
+  transition: opacity 0.5s cubic-bezier(0.65, 0, 0.35, 1), visibility 0s;
 }
 
 .nav-overlay .container {
