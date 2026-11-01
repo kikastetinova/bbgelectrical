@@ -12,6 +12,7 @@
 }
 
 .site-header .container {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -49,8 +50,10 @@
 // Main (desktop) menu — only shown on large screens (>= 1200px)
 .main-nav {
   display: none;
-  margin-left: auto;
-  margin-right: 2.4rem;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .main-nav__list {
