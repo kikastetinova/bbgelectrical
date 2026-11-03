@@ -1,0 +1,17 @@
+// ---------------------------------------------
+// Instagram feed (Elfsight widget)
+// ---------------------------------------------
+.instagram__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+}
+
+// Elfsight injects its own markup; just make sure it can't overflow
+.instagram__feed {
+  width: 100%;
+  overflow: hidden;
+}

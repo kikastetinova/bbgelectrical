@@ -977,6 +977,20 @@ h1, h2, h3, h4 {
   background: rgba(20, 16, 10, 0.15);
 }
 
+.instagram__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+}
+
+.instagram__feed {
+  width: 100%;
+  overflow: hidden;
+}
+
 .contact-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
