@@ -7,6 +7,11 @@
 @import "tailwindcss/theme.css" layer(theme);
 @import "tailwindcss/utilities.css" layer(utilities);
 
+/* Match the site's existing large-screen breakpoint (1200px, see _header.scss). */
+@theme {
+  --breakpoint-lg: 75rem;
+}
+
 @source "../index.html";
 @source "../projects.html";
 @source "./main.js";

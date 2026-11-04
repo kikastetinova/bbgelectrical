@@ -56,19 +56,6 @@
     display: none;
   }
 
-  .badges {
-    gap: 1.4rem;
-  }
-
-  .badge {
-    width: 130px;
-    height: 130px;
-  }
-
-  .badge strong {
-    font-size: 0.85rem;
-  }
-
   .feature-grid,
   .services-grid {
     grid-template-columns: 1fr;

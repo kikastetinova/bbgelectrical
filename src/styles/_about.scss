@@ -1,87 +1,24 @@
 // ---------------------------------------------
-// Intro / about strip with badge stamps
+// Brands we install (logo strip below the hero)
+// Layout (column -> row at the large breakpoint, gaps) is Tailwind in the markup.
 // ---------------------------------------------
-.intro {
-  position: relative;
-  text-align: center;
-  padding: 4rem;
+.brands__item {
+  max-width: 100%;
 }
 
-.intro__watermark {
-  position: absolute;
-  top: -1.4rem;
-  left: 50%;
-  transform: translateX(-50%);
-  width: clamp(220px, 30vw, 380px);
-  opacity: 0.05;
-  pointer-events: none;
-  user-select: none;
+// Each logo gets its own height so the marks read at a similar optical
+// size; width follows the SVG's aspect ratio and never exceeds the column.
+.brands__logo {
+  width: auto;
+  height: var(--logo-height, 3rem);
+  max-width: 100%;
+  object-fit: contain;
 }
 
-.intro__text {
-  max-width: 760px;
-  margin: 0 auto;
-  position: relative;
-  z-index: 1;
-  font-size: 1.05rem;
-}
-
-.intro__text p + p {
-  margin-top: 1.4rem;
-}
-
-.badges {
-  gap: clamp(1rem, 4vw, 3rem);
-  margin-top: 3.6rem;
-}
-
-.badge {
-  width: 168px;
-  height: 168px;
-  border-radius: 50%;
-  border: 1px solid rgba(0, 0, 0, 0.55);
-  position: relative;
-  text-align: center;
-  padding: 1rem;
-}
-
-.badge::before {
-  content: "";
-  position: absolute;
-  inset: 7px;
-  border-radius: 50%;
-  border: 1px dashed rgba(0, 0, 0, 0.28);
-}
-
-.badge strong {
-  font-size: 1.05rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  position: relative;
-}
-
-.badge strong::before,
-.badge strong::after {
-  content: "";
-  display: block;
-  width: 30px;
-  height: 1px;
-  background: rgba(0, 0, 0, 0.35);
-  margin: 0.35rem auto;
-}
-
-.badge span {
-  font-size: 0.7rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: $color-text-light;
-}
-
-.intro__signature {
-  margin-top: 3rem;
-  text-align: center;
-}
+.brands__logo--abb       { --logo-height: 2.5rem; }
+.brands__logo--schneider { --logo-height: 3.5rem; }
+.brands__logo--hager     { --logo-height: 4rem; }
+.brands__logo--legrand   { --logo-height: 2.75rem; }
 
 // Big image band with a deep rounded "arch" corner cut, like the reference
 .arch-media {
