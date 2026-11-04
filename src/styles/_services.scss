@@ -1,14 +1,6 @@
 // ---------------------------------------------
 // Services list (Commercial Fitouts / Switchboards / Workshops)
 // ---------------------------------------------
-.services-head {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: flex-end;
-  gap: 1.5rem;
-  margin-bottom: clamp(2.5rem, 5vw, 3.5rem);
-}
 
 .services-grid {
   display: grid;

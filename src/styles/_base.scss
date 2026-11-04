@@ -65,8 +65,6 @@ h1, h2, h3, h4 {
 }
 
 .eyebrow {
-  display: inline-flex;
-  align-items: center;
   gap: 0.6rem;
   font-size: 0.8rem;
   letter-spacing: 0.14em;
@@ -129,28 +127,6 @@ h1, h2, h3, h4 {
 .section--dark {
   background: $color-dark;
   color: rgba(255, 255, 255, 0.72);
-}
-
-.divider-lines {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  display: flex;
-  justify-content: space-between;
-  max-width: $container-width;
-  margin: 0 auto;
-  padding: 0 $container-pad;
-  z-index: 0;
-}
-
-.divider-lines span {
-  width: 1px;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.06);
-}
-
-.section--dark .divider-lines span {
-  background: rgba(255, 255, 255, 0.06);
 }
 
 // Reveal-on-scroll (mimics AOS fade-up, done with a tiny vanilla-JS

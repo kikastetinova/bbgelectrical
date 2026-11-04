@@ -2,7 +2,6 @@
 // Responsive overrides
 // ---------------------------------------------
 @media (max-width: 960px) {
-  .split,
   .commitment {
     grid-template-columns: 1fr;
   }
@@ -47,10 +46,6 @@
 @media (max-width: 640px) {
   .container {
     padding: 0 6vw;
-  }
-
-  .hero {
-    align-items: flex-end;
   }
 
   .hero__heading {

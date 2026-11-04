@@ -22,12 +22,12 @@
 <a href="#main" class="visually-hidden">Skip to content</a>
 
 <header class="site-header" id="siteHeader">
-  <div class="container">
-    <a href="index.html" class="logo">
+  <div class="container flex items-center justify-between">
+    <a href="index.html" class="logo flex items-center">
       <img src="/assets/img/logo.png" alt="BBG Electrical">
     </a>
     <nav class="main-nav" aria-label="Main menu">
-      <ul class="main-nav__list">
+      <ul class="main-nav__list flex items-center">
         <li><a href="#services">Services</a></li>
         <li><a href="projects.html">Projects</a></li>
         <li><a href="#about">About Us</a></li>
@@ -35,28 +35,28 @@
       </ul>
     </nav>
     <a href="tel:0413681506" class="header-phone">0413 681 506</a>
-    <button class="hamburger" id="navToggle" aria-label="Open menu" aria-expanded="false">
+    <button class="hamburger inline-flex flex-col items-center justify-center" id="navToggle" aria-label="Open menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
   </div>
 </header>
 
-<nav class="nav-overlay" id="navOverlay">
-  <div class="nav-overlay__top">
-    <button class="nav-close" id="navClose" type="button" aria-label="Close menu">
+<nav class="nav-overlay flex items-center justify-center" id="navOverlay">
+  <div class="nav-overlay__top flex items-center justify-end">
+    <button class="nav-close inline-flex items-center justify-center" id="navClose" type="button" aria-label="Close menu">
       <!-- Lucide "x" icon (ISC licence) -->
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
     </button>
   </div>
-  <div class="container">
-    <div class="nav-overlay__links">
+  <div class="container flex flex-col items-start">
+    <div class="nav-overlay__links flex flex-col">
       <a href="index.html">Home</a>
       <a href="#about">About</a>
       <a href="#services">Services</a>
       <a href="projects.html">Projects</a>
       <a href="#contact">Contact</a>
     </div>
-    <div class="nav-overlay__meta">
+    <div class="nav-overlay__meta flex flex-wrap gap-12">
       <div>
         <strong>Phone</strong>
         0413 681 506
@@ -76,10 +76,10 @@
 <main id="main">
 
   <!-- HERO -->
-  <section class="hero" style="background-image:url('/assets/img/projects/project-01.jpg')">
+  <section class="hero flex items-end" style="background-image:url('/assets/img/projects/project-01.jpg')">
     <div class="container">
       <h1 class="hero__heading">Commercial electrical, done properly</h1>
-      <div class="hero__tags">
+      <div class="hero__tags flex flex-wrap items-center">
         <span>Fitouts</span>
         <span class="sep"></span>
         <span>Switchboards</span>
@@ -93,16 +93,16 @@
   <!-- INTRO / BADGES -->
   <section class="section section--cream intro" id="about">
     <div class="container">
-      <div class="badges js-reveal">
-        <div class="badge">
+      <div class="badges js-reveal flex flex-wrap justify-center">
+        <div class="badge flex flex-col items-center justify-center gap-2">
           <strong>Licensed</strong>
           <span>Electrical Contractors</span>
         </div>
-        <div class="badge">
+        <div class="badge flex flex-col items-center justify-center gap-2">
           <strong>15+ Years</strong>
           <span>Industry Experience</span>
         </div>
-        <div class="badge">
+        <div class="badge flex flex-col items-center justify-center gap-2">
           <strong>Fully Insured</strong>
           <span>Commercial &amp; Residential</span>
         </div>
@@ -112,7 +112,7 @@
 
   <!-- BIG ARCH IMAGE + HEADING -->
   <section class="section section--cream">
-    <div class="split">
+    <div class="split flex items-center">
       <div class="split__content is-visible arch-media js-reveal">
         <img src="/assets/img/projects/project-17.jpg" alt="Commercial workshop lighting installation by BBG Electrical">
       </div>
@@ -123,8 +123,8 @@
           <p>BBG Electrical delivers commercial electrical fitouts, switchboard upgrades and ongoing maintenance for businesses that can't afford downtime. From reception fit-outs to full distribution boards, our licensed team plans the work properly and leaves every site clean, tested and compliant.</p>
           <p>We work alongside builders, facility managers and business owners across a wide range of commercial environments — offices, workshops, showrooms and retail fitouts — bringing the same attention to detail to every job, big or small.</p>
         </div>
-        <div class="btn-row">
-          <a href="/projects.html" class="btn btn--dark">Explore our projects</a>
+        <div class="btn-row flex flex-nowrap gap-4">
+          <a href="/projects.html" class="btn btn--dark inline-flex items-center">Explore our projects</a>
         </div>
       </div>
     </div>
@@ -133,16 +133,16 @@
   <!-- OUR SERVICES -->
   <section class="section" id="services">
     <div class="container">
-      <div class="split">
+      <div class="split flex items-center">
         <div class="split__content js-reveal">
           <h2 class="heading-xl">BBG<br><strong>Electrical</strong></h2>
           <p class="lede">We specialise in customised commercial electrical fitouts, switchboard upgrades and distribution work. Our team has spent years wiring offices, workshops and showrooms across the region, and that experience shows in the quality of the finish and the reliability of the systems we leave behind.</p>
-          <div class="btn-row">
-            <a href="#services" class="btn btn--dark">
+          <div class="btn-row flex flex-nowrap gap-4">
+            <a href="#services" class="btn btn--dark inline-flex items-center">
               About us
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg>
             </a>
-            <a href="tel:0413681506" class="btn btn--outline">0413 681 506</a>
+            <a href="tel:0413681506" class="btn btn--outline inline-flex items-center">0413 681 506</a>
           </div>
         </div>
         <div class="feature-grid">
@@ -169,21 +169,21 @@
   <!-- PROJECTS CAROUSEL -->
   <section class="section" id="projects">
     <div class="container">
-      <div class="projects-head js-reveal">
-        <div class="split">
+      <div class="projects-head js-reveal flex flex-wrap items-end justify-between gap-8">
+        <div class="split flex items-center">
           <h2 class="heading-lg">Explore our <strong>completed projects</strong></h2>
           <p class="lede">A selection of recent commercial fitouts, switchboard upgrades and workshop installations.</p>
         </div>
-       <div class="split">
-          <div class="nav-arrows">
-            <button class="icon-circle" id="projPrev" aria-label="Previous projects">
+       <div class="split flex items-center">
+          <div class="nav-arrows flex items-center gap-3">
+            <button class="icon-circle inline-flex items-center justify-center" id="projPrev" aria-label="Previous projects">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
             </button>
-            <button class="icon-circle" id="projNext" aria-label="Next projects">
+            <button class="icon-circle inline-flex items-center justify-center" id="projNext" aria-label="Next projects">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
             </button>
           </div>
-          <a href="projects.html" class="btn btn--dark">
+          <a href="projects.html" class="btn btn--dark inline-flex items-center">
             View all projects
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg>
           </a>
@@ -191,7 +191,7 @@
         
       </div>
 
-      <div class="projects-track" id="projectsTrack">
+      <div class="projects-track flex gap-7" id="projectsTrack">
         <div class="project-card js-reveal"><div class="project-card__media"><img src="/assets/img/projects/project-02.jpg" alt="Project photo"></div><span class="project-card__category">Commercial Fitout</span><span class="project-card__title">Reception &amp; Office Fitout</span></div>
         <div class="project-card js-reveal"><div class="project-card__media"><img src="/assets/img/projects/project-13.jpg" alt="Project photo"></div><span class="project-card__category">Switchboard Upgrade</span><span class="project-card__title">Main Distribution Board</span></div>
         <div class="project-card js-reveal"><div class="project-card__media"><img src="/assets/img/projects/project-04.jpg" alt="Project photo"></div><span class="project-card__category">Workshop &amp; Showroom</span><span class="project-card__title">Vehicle Showroom Lighting</span></div>
@@ -207,12 +207,12 @@
   <!-- INSTAGRAM FEED (Elfsight Social Feed) -->
   <section class="section section--cream instagram" id="instagram">
     <div class="container">
-      <div class="instagram__head js-reveal">
+      <div class="instagram__head js-reveal flex flex-wrap items-end justify-between gap-8">
         <div>
-          <div class="eyebrow">Instagram</div>
+          <div class="eyebrow inline-flex items-center">Instagram</div>
           <h2 class="heading-lg">Follow us <strong>@bbg_electrical_pty_ltd</strong></h2>
         </div>
-        <a href="https://www.instagram.com/bbg_electrical_pty_ltd/" class="btn btn--dark" target="_blank" rel="noopener">
+        <a href="https://www.instagram.com/bbg_electrical_pty_ltd/" class="btn btn--dark inline-flex items-center" target="_blank" rel="noopener">
           Follow on Instagram
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg>
         </a>
@@ -226,7 +226,7 @@
   <!-- CONTACT -->
   <section class="section" id="contact">
     <div class="container">
-      <div class="eyebrow js-reveal">Get in touch</div>
+      <div class="eyebrow js-reveal inline-flex items-center">Get in touch</div>
       <h2 class="heading-lg js-reveal">Let's talk about <strong>your project</strong></h2>
 
       <div class="contact-grid" style="margin-top:2.5rem">
@@ -264,7 +264,7 @@
             <label for="message">Tell us about the job</label>
             <textarea id="message" name="message" required></textarea>
           </div>
-          <button type="submit" class="btn btn--dark">
+          <button type="submit" class="btn btn--dark inline-flex items-center">
             Send enquiry
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg>
           </button>
@@ -284,7 +284,7 @@
       </div>
 
       <div class="footer-col">
-        <h4>Services <span class="footer-col__chevron"></span></h4>
+        <h4 class="flex items-center justify-between">Services <span class="footer-col__chevron"></span></h4>
         <ul>
           <li><a href="index.html#services">Commercial Fitouts</a></li>
           <li><a href="index.html#services">Switchboards &amp; Distribution</a></li>
@@ -294,7 +294,7 @@
       </div>
 
       <div class="footer-col">
-        <h4>Quick Links <span class="footer-col__chevron"></span></h4>
+        <h4 class="flex items-center justify-between">Quick Links <span class="footer-col__chevron"></span></h4>
         <ul>
           <li><a href="index.html">Home</a></li>
           <li><a href="index.html#about">About</a></li>
@@ -304,7 +304,7 @@
       </div>
 
       <div class="footer-col">
-        <h4>Contact Us <span class="footer-col__chevron"></span></h4>
+        <h4 class="flex items-center justify-between">Contact Us <span class="footer-col__chevron"></span></h4>
         <ul>
           <li>Phone: 0413 681 506</li>
           <li>Email: info@bbgelectrical.com.au</li>
@@ -313,19 +313,19 @@
       </div>
     </div>
 
-    <div class="footer-social">
-      <a class="icon-circle" href="#" aria-label="Facebook">
+    <div class="footer-social flex items-center">
+      <a class="icon-circle inline-flex items-center justify-center" href="#" aria-label="Facebook">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M15 8h2V5h-2a4 4 0 00-4 4v2H9v3h2v7h3v-7h2.5l.5-3H14V9a1 1 0 011-1z"/></svg>
       </a>
-      <a class="icon-circle" href="https://www.instagram.com/bbg_electrical_pty_ltd/" target="_blank" rel="noopener" aria-label="Instagram">
+      <a class="icon-circle inline-flex items-center justify-center" href="https://www.instagram.com/bbg_electrical_pty_ltd/" target="_blank" rel="noopener" aria-label="Instagram">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg>
       </a>
-      <a class="icon-circle" href="#" aria-label="LinkedIn">
+      <a class="icon-circle inline-flex items-center justify-center" href="#" aria-label="LinkedIn">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M7 10v7M7 7v.01M11 17v-4.5a2.5 2.5 0 015 0V17M11 10v7"/></svg>
       </a>
     </div>
 
-    <div class="footer-note">
+    <div class="footer-note flex flex-wrap justify-between gap-3">
       <span>Copyright &copy; <span id="year"></span> BBG Electrical. All rights reserved.</span>
       <span>Licensed Electrical Contractors, NSW [PLACEHOLDER — licence number]</span>
     </div>

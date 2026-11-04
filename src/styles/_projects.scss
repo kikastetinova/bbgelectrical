@@ -2,17 +2,10 @@
 // Projects horizontal carousel
 // ---------------------------------------------
 .projects-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  flex-wrap: wrap;
-  gap: 2rem;
   margin-bottom: clamp(2.5rem, 5vw, 3.5rem);
 }
 
 .projects-track {
-  display: flex;
-  gap: 1.75rem;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
@@ -61,15 +54,6 @@
   font-weight: 700;
   margin-top: 0.2rem;
   color: $color-heading;
-}
-
-.projects-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  margin-top: clamp(2.5rem, 5vw, 3.5rem);
 }
 
 // Grid gallery ("Recent work") re-using portfolio shots

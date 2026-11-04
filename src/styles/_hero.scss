@@ -4,8 +4,6 @@
 .hero {
   position: relative;
   min-height: 100vh;
-  display: flex;
-  align-items: flex-end;
   background-size: cover;
   background-position: center;
   overflow: hidden;
@@ -23,7 +21,6 @@
   position: relative;
   z-index: 2;
   padding-bottom: 4.5rem;
-  width: 100%;
 }
 
 .hero__heading {
@@ -35,13 +32,10 @@
 }
 
 .hero__tags {
-  display: flex;
-  align-items: center;
   gap: 1.1rem;
   margin-top: 2.4rem;
   color: $color-white;
   font-size: 1rem;
-  flex-wrap: wrap;
 }
 
 .hero__tags span.sep {

@@ -30,9 +30,6 @@
   font-size: 1.05rem;
   font-weight: 600;
   margin-bottom: 1.3rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   cursor: default;
 }
 
@@ -60,8 +57,6 @@
 }
 
 .footer-social {
-  display: flex;
-  align-items: center;
   gap: 0.9rem;
   padding: 2rem 0;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
@@ -77,8 +72,4 @@
   color: rgba(255, 255, 255, 0.4);
   padding: 1.5rem 0;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 0.75rem;
 }
