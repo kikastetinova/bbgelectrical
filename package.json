@@ -12,14 +12,20 @@
   },
   "license": "ISC",
   "author": "",
-  "type": "commonjs",
-  "main": "main.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build-css": "sass styles/main.scss assets/style.css",
-    "watch-css": "sass --watch styles/main.scss assets/style.css"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
-  "dependencies": {
-    "sass": "^1.105.2"
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.4",
+    "sass": "^1.107.1",
+    "tailwindcss": "^4.3.4",
+    "vite": "^7.3.7"
+  },
+  "private": true,
+  "engines": {
+    "node": ">=20.19"
   }
 }

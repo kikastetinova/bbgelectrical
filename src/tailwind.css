@@ -1,0 +1,12 @@
+/*
+ * Tailwind CSS v4.
+ * Preflight (Tailwind's CSS reset) is intentionally not imported so the
+ * existing Sass styles render exactly as before. Swap these two lines for
+ * `@import "tailwindcss";` if you want the full reset.
+ */
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);
+
+@source "../index.html";
+@source "../projects.html";
+@source "./main.js";
