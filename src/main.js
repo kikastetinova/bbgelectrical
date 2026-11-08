@@ -1,4 +1,10 @@
 /* BBG Electrical — vanilla JS interactions (no frameworks/libraries) */
+
+// Styles are imported here rather than <link>ed in the HTML: Vite injects them
+// in dev and extracts them to a <link>ed .css file in the production build.
+import "./tailwind.css";
+import "./styles/main.scss";
+
 (function () {
   "use strict";
 
