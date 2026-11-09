@@ -1,0 +1,95 @@
+// ---------------------------------------------
+// Projects listing (projects.html) + project detail pages (projects/*.html)
+// Every selector is scoped to .page-projects / .page-project-detail (body
+// classes) or to blocks that only exist on those pages, so index.html is
+// unaffected. Values are reused from existing rules where noted.
+// ---------------------------------------------
+
+// Title area below the fixed header: same top padding as .page-banner
+// (_contact.scss), without its cream band.
+.page-projects .page-top,
+.page-project-detail .page-top {
+  padding-top: clamp(9rem, 16vw, 12rem);
+}
+
+// ---------- Listing ----------
+// Square variant of the homepage .project-card__media (4:3 there).
+.page-projects .project-card__media {
+  aspect-ratio: 1 / 1;
+}
+
+// Title only (no category line), so the title takes the spacing the
+// category uses on the homepage (.project-card__category margin-top).
+.page-projects .project-card__title {
+  display: block;
+  margin-top: 1.1rem;
+}
+
+.page-projects .project-card__link {
+  display: block;
+}
+
+// Placeholder cards have no detail page yet: no hover zoom, so they don't
+// look clickable. Remove the modifier once a link is added.
+.page-projects .project-card--placeholder:hover .project-card__media img {
+  transform: none;
+}
+
+// ---------- Detail ----------
+// Two columns like .contact-grid (same column split and gap), stacked at
+// <=960px. The gallery column starts at the viewport's left edge; the info
+// column ends on the container's right edge.
+.project-detail {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2.5rem, 6vw, 5rem);
+  align-items: start;
+}
+
+.project-detail__info {
+  padding-right: calc(max(0px, (100vw - #{$container-width}) / 2) + #{$container-pad});
+}
+
+.project-gallery__main {
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+}
+
+.project-gallery__main img,
+.project-gallery__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.project-gallery__thumbs {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+.project-gallery__thumb {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  opacity: 0.5;
+  transition: opacity $speed $ease;
+}
+
+.project-gallery__thumb[aria-pressed="true"] {
+  opacity: 1;
+}
+
+@media (max-width: 960px) {
+  .project-detail {
+    grid-template-columns: 1fr;
+  }
+
+  // Mobile order: title, info, then gallery.
+  .project-detail__info {
+    order: -1;
+    padding: 0 $container-pad;
+  }
+}

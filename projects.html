@@ -4,14 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Projects | BBG Electrical</title>
-<meta name="description" content="Commercial electrical fitouts, switchboard upgrades and workshop electrical projects completed by BBG Electrical.">
+<meta name="description" content="Residential and commercial electrical projects completed by BBG Electrical.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
 </head>
-<body>
-
-<!-- TODO: replace generic captions below with real project names/locations once selected -->
+<body class="page-projects" data-header="solid">
 
 <a href="#main" class="visually-hidden">Skip to content</a>
 
@@ -20,6 +18,15 @@
     <a href="index.html" class="logo flex items-center">
       <img src="/assets/img/logo.png" alt="BBG Electrical">
     </a>
+    <nav class="main-nav" aria-label="Main menu">
+      <ul class="main-nav__list flex items-center">
+        <li><a href="index.html#services">Services</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="index.html#about">About Us</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <a href="tel:0413681506" class="header-phone">0413 681 506</a>
     <button class="hamburger inline-flex flex-col items-center justify-center" id="navToggle" aria-label="Open menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
@@ -44,7 +51,7 @@
     <div class="nav-overlay__meta flex flex-wrap gap-12">
       <div>
         <strong>Phone</strong>
-        [PLACEHOLDER] 1300 000 000
+        0413 681 506
       </div>
       <div>
         <strong>Email</strong>
@@ -60,298 +67,51 @@
 
 <main id="main">
 
-  <section class="page-banner">
+  <section class="section page-top">
     <div class="container">
-      <div class="eyebrow js-reveal inline-flex items-center">Our work</div>
-      <h1 class="heading-xl js-reveal">Explore our <strong>completed projects</strong></h1>
-      <p class="lede js-reveal">A look at recent commercial fitouts, switchboard upgrades and workshop installations. Filter by project type below.</p>
-    </div>
-  </section>
-
-  <section class="section" style="padding-top:2.5rem">
-    <div class="container">
-      <div class="filter-bar js-reveal flex flex-wrap gap-3">
-        <button class="filter-btn is-active" data-filter="all">All Projects</button>
-        <button class="filter-btn" data-filter="fitout">Commercial Fitouts</button>
-        <button class="filter-btn" data-filter="switchboard">Switchboards</button>
-        <button class="filter-btn" data-filter="workshop">Workshops &amp; Showrooms</button>
-        <button class="filter-btn" data-filter="residential">Residential</button>
+      <div class="projects-head">
+        <h1 class="heading-lg">Our Projects</h1>
       </div>
 
-      <div class="full-gallery" id="fullGallery">
-        <div class="full-gallery__item js-reveal" data-cat="fitout">
-          <img src="/assets/img/projects/project-01.jpg" alt="Office Fitout">
-          <div class="full-gallery__caption">
-            <span>Commercial Fitout</span>
-            <strong>Office Fitout</strong>
-          </div>
+      <div class="projects-grid grid grid-cols-1 gap-7 md:grid-cols-2 lg:grid-cols-4">
+        <div class="project-card">
+          <a class="project-card__link" href="projects/new-build-matraville.html"><div class="project-card__media"><img src="/assets/img/projects/project-29.jpg" alt="Kitchen with pendant lighting in a new home in Matraville"></div><span class="project-card__title">New Build Installation in Matraville</span></a>
         </div>
-        <div class="full-gallery__item js-reveal" data-cat="switchboard">
-          <img src="/assets/img/portfolio/project-02.jpg" alt="Main Distribution Board">
-          <div class="full-gallery__caption">
-            <span>Switchboard Upgrade</span>
-            <strong>Main Distribution Board</strong>
-          </div>
+        <!-- Placeholder: no detail page yet. When one exists, wrap the media + title in an
+             a.project-card__link pointing to it and remove the --placeholder modifier. -->
+        <div class="project-card project-card--placeholder">
+          <div class="project-card__media"><img src="/assets/img/projects/project-35.jpg" alt="Kitchen with island bench and pendant lights"></div><span class="project-card__title">Kitchen &amp; Living Lighting Upgrade, Maroubra</span>
         </div>
-        <div class="full-gallery__item js-reveal" data-cat="workshop">
-          <img src="/assets/img/portfolio/project-03.jpg" alt="Service Bay Lighting">
-          <div class="full-gallery__caption">
-            <span>Workshop & Showroom</span>
-            <strong>Service Bay Lighting</strong>
-          </div>
+        <!-- Placeholder: no detail page yet. When one exists, wrap the media + title in an
+             a.project-card__link pointing to it and remove the --placeholder modifier. -->
+        <div class="project-card project-card--placeholder">
+          <div class="project-card__media"><img src="/assets/img/projects/project-36.jpg" alt="Upgraded switchboard and distribution board"></div><span class="project-card__title">Switchboard Upgrade, Randwick</span>
         </div>
-        <div class="full-gallery__item js-reveal" data-cat="residential">
-          <img src="/assets/img/portfolio/project-04.jpg" alt="Kitchen Electrical">
-          <div class="full-gallery__caption">
-            <span>Residential Electrical</span>
-            <strong>Kitchen Electrical</strong>
-          </div>
+        <!-- Placeholder: no detail page yet. When one exists, wrap the media + title in an
+             a.project-card__link pointing to it and remove the --placeholder modifier. -->
+        <div class="project-card project-card--placeholder">
+          <div class="project-card__media"><img src="/assets/img/projects/project-25.jpg" alt="Structured data cabling on a comms rack"></div><span class="project-card__title">Data Cabling &amp; Comms Room, Botany</span>
         </div>
-        <div class="full-gallery__item js-reveal" data-cat="fitout">
-          <img src="/assets/img/portfolio/project-05.jpg" alt="Reception Build">
-          <div class="full-gallery__caption">
-            <span>Commercial Fitout</span>
-            <strong>Reception Build</strong>
-          </div>
+        <!-- Placeholder: no detail page yet. When one exists, wrap the media + title in an
+             a.project-card__link pointing to it and remove the --placeholder modifier. -->
+        <div class="project-card project-card--placeholder">
+          <div class="project-card__media"><img src="/assets/img/projects/project-08.jpg" alt="Office reception with feature lighting"></div><span class="project-card__title">Office Reception Fitout, Mascot</span>
         </div>
-        <div class="full-gallery__item js-reveal" data-cat="switchboard">
-          <img src="/assets/img/portfolio/project-06.jpg" alt="Metering Upgrade">
-          <div class="full-gallery__caption">
-            <span>Switchboard Upgrade</span>
-            <strong>Metering Upgrade</strong>
-          </div>
+        <!-- Placeholder: no detail page yet. When one exists, wrap the media + title in an
+             a.project-card__link pointing to it and remove the --placeholder modifier. -->
+        <div class="project-card project-card--placeholder">
+          <div class="project-card__media"><img src="/assets/img/projects/project-02.jpg" alt="Car showroom with linear ceiling lighting"></div><span class="project-card__title">Showroom Lighting, Alexandria</span>
         </div>
-        <div class="full-gallery__item js-reveal" data-cat="workshop">
-          <img src="/assets/img/portfolio/project-07.jpg" alt="Showroom Lighting">
-          <div class="full-gallery__caption">
-            <span>Workshop & Showroom</span>
-            <strong>Showroom Lighting</strong>
-          </div>
+        <!-- Placeholder: no detail page yet. When one exists, wrap the media + title in an
+             a.project-card__link pointing to it and remove the --placeholder modifier. -->
+        <div class="project-card project-card--placeholder">
+          <div class="project-card__media"><img src="/assets/img/projects/project-16.jpg" alt="Vehicle workshop with service bay lighting"></div><span class="project-card__title">Workshop Lighting &amp; Power, Banksmeadow</span>
         </div>
-        <div class="full-gallery__item js-reveal" data-cat="residential">
-          <img src="/assets/img/portfolio/project-08.jpg" alt="Home Rewire">
-          <div class="full-gallery__caption">
-            <span>Residential Electrical</span>
-            <strong>Home Rewire</strong>
-          </div>
+        <!-- Placeholder: no detail page yet. When one exists, wrap the media + title in an
+             a.project-card__link pointing to it and remove the --placeholder modifier. -->
+        <div class="project-card project-card--placeholder">
+          <div class="project-card__media"><img src="/assets/img/projects/project-30.jpg" alt="Motor control panel with drives and cabling"></div><span class="project-card__title">Motor Control Panel Installation, Port Botany</span>
         </div>
-        <div class="full-gallery__item js-reveal" data-cat="fitout">
-          <img src="/assets/img/portfolio/project-09.jpg" alt="Boardroom Fitout">
-          <div class="full-gallery__caption">
-            <span>Commercial Fitout</span>
-            <strong>Boardroom Fitout</strong>
-          </div>
-        </div>
-        <div class="full-gallery__item js-reveal" data-cat="switchboard">
-          <img src="/assets/img/portfolio/project-10.jpg" alt="Control Panel">
-          <div class="full-gallery__caption">
-            <span>Switchboard Upgrade</span>
-            <strong>Control Panel</strong>
-          </div>
-        </div>
-        <div class="full-gallery__item js-reveal" data-cat="workshop">
-          <img src="/assets/img/portfolio/project-11.jpg" alt="Warehouse Power">
-          <div class="full-gallery__caption">
-            <span>Workshop & Showroom</span>
-            <strong>Warehouse Power</strong>
-          </div>
-        </div>
-        <div class="full-gallery__item js-reveal" data-cat="residential">
-          <img src="/assets/img/portfolio/project-12.jpg" alt="Lighting Upgrade">
-          <div class="full-gallery__caption">
-            <span>Residential Electrical</span>
-            <strong>Lighting Upgrade</strong>
-          </div>
-        </div>
-        <div class="full-gallery__item js-reveal" data-cat="fitout">
-          <img src="/assets/img/portfolio/project-13.jpg" alt="Retail Fitout">
-          <div class="full-gallery__caption">
-            <span>Commercial Fitout</span>
-            <strong>Retail Fitout</strong>
-          </div>
-        </div>
-        <div class="full-gallery__item js-reveal" data-cat="switchboard">
-          <img src="/assets/img/portfolio/project-14.jpg" alt="Switchboard Rebuild">
-          <div class="full-gallery__caption">
-            <span>Switchboard Upgrade</span>
-            <strong>Switchboard Rebuild</strong>
-          </div>
-        </div>
-        <div class="full-gallery__item js-reveal" data-cat="workshop">
-          <img src="/assets/img/portfolio/project-15.jpg" alt="Workshop Fitout">
-          <div class="full-gallery__caption">
-            <span>Workshop & Showroom</span>
-            <strong>Workshop Fitout</strong>
-          </div>
-        </div>
-        <div class="full-gallery__item js-reveal" data-cat="residential">
-          <img src="/assets/img/portfolio/project-16.jpg" alt="Kitchen Electrical">
-          <div class="full-gallery__caption">
-            <span>Residential Electrical</span>
-            <strong>Kitchen Electrical</strong>
-          </div>
-        </div>
-        <div class="full-gallery__item js-reveal" data-cat="fitout">
-          <img src="/assets/img/portfolio/project-17.jpg" alt="Kitchen & Amenities">
-          <div class="full-gallery__caption">
-            <span>Commercial Fitout</span>
-            <strong>Kitchen & Amenities</strong>
-          </div>
-        </div>
-        <div class="full-gallery__item js-reveal" data-cat="switchboard">
-          <img src="/assets/img/portfolio/project-18.jpg" alt="Main Distribution Board">
-          <div class="full-gallery__caption">
-            <span>Switchboard Upgrade</span>
-            <strong>Main Distribution Board</strong>
-          </div>
-        </div>
-        <div class="full-gallery__item js-reveal" data-cat="workshop">
-          <img src="/assets/img/portfolio/project-24.jpg" alt="Service Bay Lighting">
-          <div class="full-gallery__caption">
-            <span>Workshop & Showroom</span>
-            <strong>Service Bay Lighting</strong>
-          </div>
-        </div>
-        <div class="full-gallery__item js-reveal" data-cat="residential">
-          <img src="/assets/img/portfolio/project-25.jpg" alt="Home Rewire">
-          <div class="full-gallery__caption">
-            <span>Residential Electrical</span>
-            <strong>Home Rewire</strong>
-          </div>
-        </div>
-        <div class="full-gallery__item js-reveal" data-cat="fitout">
-          <img src="/assets/img/portfolio/project-26.jpg" alt="Office Fitout">
-          <div class="full-gallery__caption">
-            <span>Commercial Fitout</span>
-            <strong>Office Fitout</strong>
-          </div>
-        </div>
-        <div class="full-gallery__item js-reveal" data-cat="switchboard">
-          <img src="/assets/img/portfolio/project-27.jpg" alt="Metering Upgrade">
-          <div class="full-gallery__caption">
-            <span>Switchboard Upgrade</span>
-            <strong>Metering Upgrade</strong>
-          </div>
-        </div>
-        <div class="full-gallery__item js-reveal" data-cat="workshop">
-          <img src="/assets/img/portfolio/project-28.jpg" alt="Showroom Lighting">
-          <div class="full-gallery__caption">
-            <span>Workshop & Showroom</span>
-            <strong>Showroom Lighting</strong>
-          </div>
-        </div>
-        <div class="full-gallery__item js-reveal" data-cat="residential">
-          <img src="/assets/img/portfolio/project-29.jpg" alt="Lighting Upgrade">
-          <div class="full-gallery__caption">
-            <span>Residential Electrical</span>
-            <strong>Lighting Upgrade</strong>
-          </div>
-        </div>
-        <div class="full-gallery__item js-reveal" data-cat="fitout">
-          <img src="/assets/img/portfolio/project-30.jpg" alt="Reception Build">
-          <div class="full-gallery__caption">
-            <span>Commercial Fitout</span>
-            <strong>Reception Build</strong>
-          </div>
-        </div>
-        <div class="full-gallery__item js-reveal" data-cat="switchboard">
-          <img src="/assets/img/portfolio/project-31.jpg" alt="Control Panel">
-          <div class="full-gallery__caption">
-            <span>Switchboard Upgrade</span>
-            <strong>Control Panel</strong>
-          </div>
-        </div>
-        <div class="full-gallery__item js-reveal" data-cat="workshop">
-          <img src="/assets/img/portfolio/project-32.jpg" alt="Warehouse Power">
-          <div class="full-gallery__caption">
-            <span>Workshop & Showroom</span>
-            <strong>Warehouse Power</strong>
-          </div>
-        </div>
-        <div class="full-gallery__item js-reveal" data-cat="residential">
-          <img src="/assets/img/portfolio/project-33.jpg" alt="Kitchen Electrical">
-          <div class="full-gallery__caption">
-            <span>Residential Electrical</span>
-            <strong>Kitchen Electrical</strong>
-          </div>
-        </div>
-        <div class="full-gallery__item js-reveal" data-cat="fitout">
-          <img src="/assets/img/portfolio/project-34.jpg" alt="Boardroom Fitout">
-          <div class="full-gallery__caption">
-            <span>Commercial Fitout</span>
-            <strong>Boardroom Fitout</strong>
-          </div>
-        </div>
-        <div class="full-gallery__item js-reveal" data-cat="switchboard">
-          <img src="/assets/img/portfolio/project-35.jpg" alt="Switchboard Rebuild">
-          <div class="full-gallery__caption">
-            <span>Switchboard Upgrade</span>
-            <strong>Switchboard Rebuild</strong>
-          </div>
-        </div>
-        <div class="full-gallery__item js-reveal" data-cat="workshop">
-          <img src="/assets/img/portfolio/project-36.jpg" alt="Workshop Fitout">
-          <div class="full-gallery__caption">
-            <span>Workshop & Showroom</span>
-            <strong>Workshop Fitout</strong>
-          </div>
-        </div>
-        <div class="full-gallery__item js-reveal" data-cat="residential">
-          <img src="/assets/img/portfolio/project-37.jpg" alt="Home Rewire">
-          <div class="full-gallery__caption">
-            <span>Residential Electrical</span>
-            <strong>Home Rewire</strong>
-          </div>
-        </div>
-        <div class="full-gallery__item js-reveal" data-cat="fitout">
-          <img src="/assets/img/portfolio/project-38.jpg" alt="Retail Fitout">
-          <div class="full-gallery__caption">
-            <span>Commercial Fitout</span>
-            <strong>Retail Fitout</strong>
-          </div>
-        </div>
-        <div class="full-gallery__item js-reveal" data-cat="switchboard">
-          <img src="/assets/img/portfolio/project-39.jpg" alt="Main Distribution Board">
-          <div class="full-gallery__caption">
-            <span>Switchboard Upgrade</span>
-            <strong>Main Distribution Board</strong>
-          </div>
-        </div>
-        <div class="full-gallery__item js-reveal" data-cat="workshop">
-          <img src="/assets/img/portfolio/project-40.jpg" alt="Service Bay Lighting">
-          <div class="full-gallery__caption">
-            <span>Workshop & Showroom</span>
-            <strong>Service Bay Lighting</strong>
-          </div>
-        </div>
-        <div class="full-gallery__item js-reveal" data-cat="residential">
-          <img src="/assets/img/portfolio/project-41.jpg" alt="Lighting Upgrade">
-          <div class="full-gallery__caption">
-            <span>Residential Electrical</span>
-            <strong>Lighting Upgrade</strong>
-          </div>
-        </div>
-        <div class="full-gallery__item js-reveal" data-cat="fitout">
-          <img src="/assets/img/portfolio/project-42.jpg" alt="Kitchen & Amenities">
-          <div class="full-gallery__caption">
-            <span>Commercial Fitout</span>
-            <strong>Kitchen & Amenities</strong>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section section--dark">
-    <div class="container" style="text-align:center">
-      <div class="eyebrow js-reveal inline-flex items-center" style="justify-content:center;width:100%">Ready when you are</div>
-      <h2 class="heading-lg js-reveal">Got a job that needs a <strong>proper sparky</strong>?</h2>
-      <div class="btn-row js-reveal flex flex-nowrap gap-4" style="justify-content:center">
-        <a href="index.html#contact" class="btn btn--dark inline-flex items-center">
-          Get a quote
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg>
-        </a>
-        <a href="tel:1300000000" class="btn btn--outline inline-flex items-center">[PLACEHOLDER] 1300 000 000</a>
       </div>
     </div>
   </section>
@@ -389,7 +149,7 @@
       <div class="footer-col">
         <h4 class="flex items-center justify-between">Contact Us <span class="footer-col__chevron"></span></h4>
         <ul>
-          <li>Phone: [PLACEHOLDER] 1300 000 000</li>
+          <li>Phone: 0413 681 506</li>
           <li>Email: info@bbgelectrical.com.au</li>
           <li>[PLACEHOLDER — add your address]</li>
         </ul>
@@ -400,7 +160,7 @@
       <a class="icon-circle inline-flex items-center justify-center" href="#" aria-label="Facebook">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M15 8h2V5h-2a4 4 0 00-4 4v2H9v3h2v7h3v-7h2.5l.5-3H14V9a1 1 0 011-1z"/></svg>
       </a>
-      <a class="icon-circle inline-flex items-center justify-center" href="#" aria-label="Instagram">
+      <a class="icon-circle inline-flex items-center justify-center" href="https://www.instagram.com/bbg_electrical/" target="_blank" rel="noopener" aria-label="Instagram">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg>
       </a>
       <a class="icon-circle inline-flex items-center justify-center" href="#" aria-label="LinkedIn">

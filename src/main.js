@@ -14,9 +14,12 @@ import "./styles/main.scss";
 
   /* ---------- Sticky header background ---------- */
   var header = document.getElementById("siteHeader");
+  // Pages without a dark hero opt in with <body data-header="solid"> to keep
+  // the existing .is-scrolled header look at the top of the page too.
+  var solidHeader = document.body.getAttribute("data-header") === "solid";
   function onScroll() {
     if (!header) return;
-    if (window.scrollY > 40) {
+    if (solidHeader || window.scrollY > 40) {
       header.classList.add("is-scrolled");
     } else {
       header.classList.remove("is-scrolled");
@@ -122,4 +125,20 @@ import "./styles/main.scss";
       });
     });
   }
+
+  /* ---------- Project detail: thumbnail gallery ---------- */
+  document.querySelectorAll("[data-gallery]").forEach(function (gallery) {
+    var mainImg = gallery.querySelector("[data-gallery-main]");
+    var thumbs = gallery.querySelectorAll("[data-gallery-thumb]");
+    if (!mainImg || !thumbs.length) return;
+    thumbs.forEach(function (thumb) {
+      thumb.addEventListener("click", function () {
+        mainImg.src = thumb.getAttribute("data-src");
+        mainImg.alt = thumb.getAttribute("data-alt");
+        thumbs.forEach(function (t) {
+          t.setAttribute("aria-pressed", t === thumb ? "true" : "false");
+        });
+      });
+    });
+  });
 })();
