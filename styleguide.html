@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BBG Style Guide</title>
+<meta name="description" content="Style guide documenting the styles and components currently implemented on index.html.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Same font request as index.html -->
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+
+<!--
+  Documentation-only styles. Every selector here is prefixed .sg- so it
+  never targets a site class. Site components below use the site's own
+  stylesheets (src/tailwind.css + src/styles/main.scss via src/styleguide.js),
+  unchanged.
+-->
+<style>
+  .sg {
+    --sg-ink: #1d1d1f;
+    --sg-muted: #5f6368;
+    --sg-line: #dcdcdc;
+    --sg-panel: #ffffff;
+    --sg-code-bg: #f1f1f1;
+    --sg-flag: #a33a00;
+    --sg-flag-bg: #fff3ea;
+    /* No font/colour set here on purpose: site components must keep
+       inheriting body's values from _base.scss. Doc colours are set on
+       doc-only elements below. */
+  }
+  .sg-top, .sg-lead, .sg-table, .sg-swatch, .sg-preview__label { color: var(--sg-ink); }
+  .sg code, .sg .sg-mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.82em; }
+  .sg code { background: var(--sg-code-bg); padding: 0.1em 0.35em; border-radius: 4px; word-break: break-word; }
+  .sg-wrap { max-width: 1240px; margin: 0 auto; padding: 0 16px; }
+  .sg-top { padding: 48px 0 24px; border-bottom: 1px solid var(--sg-line); }
+  .sg-top h1 { font-size: 2rem; line-height: 1.2; color: var(--sg-ink); margin-bottom: 8px; }
+  .sg-top p { color: var(--sg-muted); max-width: 72ch; }
+  .sg-toc { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 18px; font-size: 0.9rem; }
+  .sg-toc a { text-decoration: underline; text-underline-offset: 3px; color: var(--sg-ink); }
+  .sg-section { padding: 40px 0; border-bottom: 1px solid var(--sg-line); }
+  .sg-section > .sg-wrap > h2 { font-size: 1.5rem; line-height: 1.25; color: var(--sg-ink); font-weight: 700; margin-bottom: 6px; letter-spacing: 0; }
+  .sg-section h3.sg-h3 { font-size: 1.1rem; color: var(--sg-ink); font-weight: 700; margin: 28px 0 10px; letter-spacing: 0; line-height: 1.3; }
+  .sg-lead { color: var(--sg-muted); max-width: 80ch; margin-bottom: 18px; }
+  .sg-p { color: var(--sg-muted); max-width: 80ch; margin: 8px 0; font-size: 0.95rem; }
+  .sg-label { display: block; font-size: 0.78rem; color: var(--sg-muted); margin: 10px 0 6px; }
+  .sg-label code { color: var(--sg-ink); }
+  .sg-table-wrap { overflow-x: auto; margin: 10px 0 18px; border: 1px solid var(--sg-line); border-radius: 8px; background: var(--sg-panel); }
+  .sg-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; line-height: 1.45; }
+  .sg-table th, .sg-table td { text-align: left; vertical-align: top; padding: 8px 10px; border-bottom: 1px solid var(--sg-line); }
+  .sg-table th { background: #fafafa; font-weight: 700; color: var(--sg-ink); white-space: nowrap; }
+  .sg-table tr:last-child td { border-bottom: 0; }
+  .sg-table td.sg-diff { background: #f5f8ff; }
+  .sg-flag { display: block; background: var(--sg-flag-bg); color: var(--sg-flag); border-left: 3px solid var(--sg-flag); padding: 8px 12px; margin: 10px 0; font-size: 0.88rem; border-radius: 0 6px 6px 0; }
+  .sg-flag strong { color: var(--sg-flag); }
+  .sg-note { display: block; background: #f6f6f6; border-left: 3px solid #9e9e9e; padding: 8px 12px; margin: 10px 0; font-size: 0.88rem; color: var(--sg-muted); border-radius: 0 6px 6px 0; }
+  .sg-tag { display: inline-block; font-size: 0.72rem; font-weight: 700; padding: 1px 7px; border-radius: 999px; background: #e8eefc; color: #2b4aa0; margin-left: 6px; vertical-align: middle; }
+  .sg-tag--flag { background: var(--sg-flag-bg); color: var(--sg-flag); }
+  .sg-specimen { border: 1px dashed #bdbdbd; border-radius: 8px; padding: 20px; background: #f9f9f9; margin: 6px 0 14px; overflow-x: auto; }
+  .sg-specimen--flush { padding: 0; overflow: hidden; }
+  .sg-specimen--dark { background: #1c1c1c; }
+  .sg-specimen--cream { background: #f4f1ec; }
+  .sg-specimen--footer { background: #212121; }
+  /* A transformed box becomes the containing block for position:fixed
+     children, so the fixed header / overlay render inside the frame. */
+  .sg-frame { position: relative; transform: translateZ(0); overflow: hidden; border-top: 1px dashed #bdbdbd; border-bottom: 1px dashed #bdbdbd; margin: 6px 0 14px; }
+  .sg-frame--scrolled { height: 150px; background: #f9f9f9; }
+  .sg-frame--menu { height: 720px; }
+  .sg-grid { display: grid; gap: 14px; }
+  .sg-grid--swatches { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+  .sg-grid--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .sg-swatch { border: 1px solid var(--sg-line); border-radius: 8px; overflow: hidden; background: var(--sg-panel); font-size: 0.8rem; }
+  .sg-swatch__chip { height: 72px; border-bottom: 1px solid var(--sg-line); }
+  .sg-swatch__body { padding: 8px 10px; line-height: 1.45; }
+  .sg-swatch__body b { display: block; font-size: 0.85rem; }
+  .sg-swatch__body span { color: var(--sg-muted); display: block; }
+  .sg-box-outline { outline: 1px dashed #9e9e9e; outline-offset: 4px; min-height: 40px; padding: 8px; }
+  .sg-placeholder { border: 1px dashed #9e9e9e; color: var(--sg-muted); padding: 24px; text-align: center; font-size: 0.9rem; border-radius: 6px; }
+  .sg-previews { display: flex; gap: 24px; align-items: flex-start; overflow-x: auto; padding-bottom: 8px; }
+  .sg-preview { flex: 0 0 auto; }
+  .sg-preview__label { font-size: 0.8rem; color: var(--sg-muted); margin-bottom: 6px; }
+  .sg-preview__vp { border: 1px solid var(--sg-line); border-radius: 8px; overflow: hidden; background: #fff; }
+  .sg-preview__vp--mobile { width: 390px; height: 760px; }
+  .sg-preview__vp--mobile iframe { width: 390px; height: 760px; border: 0; display: block; }
+  .sg-preview__vp--desktop { width: 720px; height: 450px; }
+  .sg-preview__vp--desktop iframe { width: 1440px; height: 900px; border: 0; display: block; transform: scale(0.5); transform-origin: 0 0; }
+  .sg-bp { display: inline-block; font-size: 0.72rem; font-weight: 700; padding: 2px 8px; border-radius: 999px; background: #1d1d1f; color: #fff; }
+  .sg-current { font-size: 0.85rem; color: var(--sg-muted); }
+  @media (max-width: 700px) {
+    .sg-grid--2 { grid-template-columns: 1fr; }
+    .sg-top h1 { font-size: 1.6rem; }
+    .sg-specimen { padding: 14px; }
+  }
+</style>
+<script type="module" src="/src/styleguide.js"></script>
+</head>
+<body class="sg">
+
+<header class="sg-top">
+  <div class="sg-wrap">
+    <h1>BBG Electrical: homepage style guide</h1>
+    <p>This guide covers only what <code>index.html</code> implements today. Every component below is live markup copied from the homepage and styled by the site's own, unchanged stylesheets: <code>src/tailwind.css</code> and <code>src/styles/*.scss</code>. Values come from the source files and were confirmed with computed styles in Chromium at 390&nbsp;px (mobile) and 1440&nbsp;px (desktop). 768&nbsp;px and 1024&nbsp;px were checked for the in-between breakpoints. Media queries respond to the browser width, so each live example shows the layout for <em>your</em> current window. The tables give mobile and desktop values side by side.</p>
+    <p class="sg-current">Current viewport: <span class="sg-mono" id="sgVw">-</span></p>
+    <nav class="sg-toc" aria-label="Style guide sections">
+      <a href="#sg-breakpoints">Breakpoints</a>
+      <a href="#sg-colors">Colours</a>
+      <a href="#sg-type">Typography</a>
+      <a href="#sg-layout">Layout &amp; spacing</a>
+      <a href="#sg-buttons">Buttons</a>
+      <a href="#sg-forms">Form fields</a>
+      <a href="#sg-images">Images</a>
+      <a href="#sg-header">Header &amp; navigation</a>
+      <a href="#sg-hero">Hero</a>
+      <a href="#sg-brands">Brand logos</a>
+      <a href="#sg-services">Services &amp; feature cards</a>
+      <a href="#sg-projects">Projects &amp; project cards</a>
+      <a href="#sg-instagram">Instagram</a>
+      <a href="#sg-contact">Contact</a>
+      <a href="#sg-footer">Footer</a>
+      <a href="#sg-motion">Motion &amp; JS states</a>
+      <a href="#sg-issues">Inconsistencies</a>
+      <a href="#sg-previews">Responsive previews</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ============================================================ -->
+<section class="sg-section" id="sg-breakpoints">
+  <div class="sg-wrap">
+    <h2>Breakpoints</h2>
+    <p class="sg-lead">Two systems set breakpoints: hand-written Sass media queries and Tailwind's responsive prefixes. Many sizes are also fluid via <code>clamp()</code>, so they scale continuously between breakpoints.</p>
+    <div class="sg-table-wrap"><table class="sg-table">
+      <thead><tr><th>Breakpoint</th><th>Defined in</th><th>What changes on the homepage</th></tr></thead>
+      <tbody>
+        <tr><td><code>max-width: 640px</code></td><td><code>src/styles/_responsive.scss:46</code></td><td><code>.hero__heading</code> max-width becomes 100%. <code>.hero__tags .rule</code> is hidden. <code>.form-row</code> becomes one column. <code>.footer-top</code> becomes one column, and the footer columns turn into an accordion (chevron shown, list collapsed). <code>.container</code> padding is restated as <code>0 6vw</code>, the same value as the base rule.</td></tr>
+        <tr><td><code>max-width: 960px</code></td><td><code>src/styles/_responsive.scss:4</code></td><td><code>.contact-grid</code> becomes one column. <code>.footer-top</code> becomes two columns, with <code>.footer-brand</code> spanning both.</td></tr>
+        <tr><td><code>md:</code> = <code>min-width: 48rem</code> (768px)</td><td>Tailwind default theme</td><td><code>.projects-track</code> goes from 1 column to 5 (<code>md:grid-cols-5</code>). Feature-card wrapper switches to <code>md:flex-nowrap</code>. The services row also has <code>md:flex-row</code>, but it is already a row, so this has no visible effect.</td></tr>
+        <tr><td><code>lg:</code> = <code>min-width: 75rem</code> (1200px)</td><td><code>src/tailwind.css:10-12</code> (overrides Tailwind's 64rem)</td><td><code>.brands__list</code> goes from a column to a row (<code>lg:flex-row lg:justify-center lg:gap-8</code>). The services row stops wrapping (<code>lg:flex-nowrap</code>). The feature-card gap goes from 4rem to 2rem (<code>lg:gap-8</code>).</td></tr>
+        <tr><td><code>min-width: 1200px</code></td><td><code>src/styles/_header.scss:254</code></td><td><code>.main-nav</code> and <code>.header-phone</code> are shown; <code>.hamburger</code> is hidden.</td></tr>
+      </tbody>
+    </table></div>
+    <span class="sg-note"><code>src/styles/_variables.scss:39-43</code> also lists "mobile &lt; 640px, tablet &lt; 960px, desktop &lt; 1200px" as reference comments only. They are not variables, and nothing uses them in code.</span>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<section class="sg-section" id="sg-colors">
+  <div class="sg-wrap">
+    <h2>Colours &amp; backgrounds</h2>
+    <p class="sg-lead">Sass variables from <code>src/styles/_variables.scss:8-18</code>, with the homepage selectors that use each one.</p>
+    <div class="sg-grid sg-grid--swatches">
+      <div class="sg-swatch"><div class="sg-swatch__chip" style="background:#f9f9f9"></div><div class="sg-swatch__body"><b>$color-bg</b><span class="sg-mono">#f9f9f9</span><span><code>body</code> background. <code>.site-header.is-scrolled</code> uses it at 92% opacity.</span></div></div>
+      <div class="sg-swatch"><div class="sg-swatch__chip" style="background:#f4f1ec"></div><div class="sg-swatch__body"><b>$color-bg-cream</b><span class="sg-mono">#f4f1ec</span><span><code>.section--cream</code> (brands, Instagram)</span></div></div>
+      <div class="sg-swatch"><div class="sg-swatch__chip" style="background:#1c1c1c"></div><div class="sg-swatch__body"><b>$color-dark</b><span class="sg-mono">#1c1c1c</span><span><code>.btn--dark</code> bg, <code>.nav-overlay</code> bg, scrolled header link/phone/hamburger colour, <code>.nav-close:hover</code> text</span></div></div>
+      <div class="sg-swatch"><div class="sg-swatch__chip" style="background:#212121"></div><div class="sg-swatch__body"><b>$color-dark-soft</b><span class="sg-mono">#212121</span><span><code>.site-footer</code> background</span></div></div>
+      <div class="sg-swatch"><div class="sg-swatch__chip" style="background:#232323"></div><div class="sg-swatch__body"><b>$color-heading</b><span class="sg-mono">#232323</span><span><code>h1-h4</code>, <code>.heading-xl</code>, <code>.btn--outline</code> text, form input text, <code>.project-card__title</code>, <code>.contact-info__item strong</code></span></div></div>
+      <div class="sg-swatch"><div class="sg-swatch__chip" style="background:#4a4a4a"></div><div class="sg-swatch__body"><b>$color-text</b><span class="sg-mono">#4a4a4a</span><span><code>body</code> text, <code>.lede</code></span></div></div>
+      <div class="sg-swatch"><div class="sg-swatch__chip" style="background:#6f6f6f"></div><div class="sg-swatch__body"><b>$color-text-light</b><span class="sg-mono">#6f6f6f</span><span><code>.eyebrow</code>, <code>.feature-card p</code>, <code>.project-card__category</code>, contact &amp; form labels</span></div></div>
+      <div class="sg-swatch"><div class="sg-swatch__chip" style="background:#e2ddd3"></div><div class="sg-swatch__body"><b>$color-border</b><span class="sg-mono">#e2ddd3</span><span><code>.contact-info__item</code> borders, form input/textarea borders</span></div></div>
+      <div class="sg-swatch"><div class="sg-swatch__chip" style="background:#ffffff"></div><div class="sg-swatch__body"><b>$color-white</b><span class="sg-mono">#ffffff</span><span>Hero text, <code>.btn--dark</code> text, nav overlay text, input background, footer headings</span></div></div>
+      <div class="sg-swatch"><div class="sg-swatch__chip" style="background:#d97f2c"></div><div class="sg-swatch__body"><b>$color-accent</b><span class="sg-mono">#d97f2c</span><span>Hover/focus only: <code>.btn--dark:hover</code> bg, <code>.btn--outline:hover</code>, <code>.header-phone:hover</code>, <code>.icon-circle:hover</code>, input <code>:focus</code> border. Also the <code>.eyebrow::before</code> line.</span></div></div>
+    </div>
+    <span class="sg-note"><code>$color-bg-cream-2</code> (<code>#efece5</code>) is defined in <code>_variables.scss:10</code> but no homepage rule uses it. <code>.section--dark</code> is defined in <code>_base.scss</code> but not used on the homepage.</span>
+
+    <h3 class="sg-h3">Literal rgba values used on the homepage</h3>
+    <div class="sg-table-wrap"><table class="sg-table">
+      <thead><tr><th>Value</th><th>Selector</th><th>File</th></tr></thead>
+      <tbody>
+        <tr><td><code>linear-gradient(180deg, rgba(0,0,0,.15) 0%, rgba(0,0,0,.05) 35%, rgba(0,0,0,.65) 100%)</code></td><td><code>.hero::after</code> (image overlay)</td><td><code>_hero.scss:12</code></td></tr>
+        <tr><td><code>rgba(255,255,255,.4)</code> / <code>rgba(255,255,255,.35)</code></td><td><code>.hero__tags span.sep</code> / <code>.hero__tags .rule</code></td><td><code>_hero.scss:40,47</code></td></tr>
+        <tr><td><code>rgba(249,249,249,.92)</code> + <code>backdrop-filter: blur(10px)</code>; shadow <code>0 1px 0 rgba(0,0,0,.06)</code></td><td><code>.site-header.is-scrolled</code></td><td><code>_header.scss:19-22</code></td></tr>
+        <tr><td><code>rgba(255,255,255,.5)</code> → scrolled <code>rgba(0,0,0,.25)</code> → menu-open <code>rgba(255,255,255,.6)</code></td><td><code>.hamburger</code> border</td><td><code>_header.scss</code></td></tr>
+        <tr><td><code>rgba(255,255,255,.6)</code></td><td><code>.nav-close</code> border</td><td><code>_header.scss:193</code></td></tr>
+        <tr><td><code>rgba(255,255,255,.5)</code> / <code>rgba(255,255,255,.55)</code></td><td><code>.nav-overlay__links a</code> / <code>.nav-overlay__meta</code></td><td><code>_header.scss</code></td></tr>
+        <tr><td><code>rgba(0,0,0,.35)</code></td><td><code>.btn--outline</code> border</td><td><code>_buttons.scss:33</code></td></tr>
+        <tr><td><code>rgba(255,255,255,.65)</code></td><td><code>.site-footer</code> text</td><td><code>_footer.scss:6</code></td></tr>
+        <tr><td><code>rgba(255,255,255,.1)</code></td><td><code>.footer-social</code>, <code>.footer-note</code> top borders; mobile <code>.footer-col h4</code> border</td><td><code>_footer.scss</code>, <code>_responsive.scss</code></td></tr>
+        <tr><td><code>rgba(255,255,255,.25)</code></td><td><code>.footer-social .icon-circle</code> border</td><td><code>_footer.scss:65</code></td></tr>
+        <tr><td><code>rgba(255,255,255,.4)</code></td><td><code>.footer-note</code> text</td><td><code>_footer.scss:71</code></td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<section class="sg-section" id="sg-type">
+  <div class="sg-wrap">
+    <h2>Typography</h2>
+    <p class="sg-lead">Font: <b>Plus Jakarta Sans</b>, loaded from Google Fonts with weights 400, 500, 600, 700 and 800. Fallback stack: <code>-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif</code> (<code>$font-body</code>). The homepage uses weights 400, 500, 600 and 700. 800 is loaded but unused. <b>Caveat</b> is also loaded (<code>$font-script</code>, <code>.script</code>), but no homepage element uses it.</p>
+
+    <h3 class="sg-h3">Base (explicit rules)</h3>
+    <div class="sg-table-wrap"><table class="sg-table">
+      <thead><tr><th>Selector</th><th>Values</th><th>Source</th></tr></thead>
+      <tbody>
+        <tr><td><code>html</code></td><td><code>font-size: 100%</code> (= browser default 16px), <code>scroll-behavior: smooth</code></td><td><code>_base.scss:10</code></td></tr>
+        <tr><td><code>body</code></td><td><code>font-family: $font-body</code>; <code>line-height: 1.65</code> (26.4px at 16px); <code>font-weight: 400</code>; colour <code>#4a4a4a</code>; <code>-webkit-font-smoothing: antialiased</code>. Body font-size is <b>not set</b>, so it inherits the browser default 16px.</td><td><code>_base.scss:15</code></td></tr>
+        <tr><td><code>h1, h2, h3, h4</code></td><td><code>font-weight: 600</code>; <code>line-height: 1.15</code>; <code>letter-spacing: -0.01em</code>; colour <code>#232323</code></td><td><code>_base.scss:47</code></td></tr>
+        <tr><td><code>a</code></td><td><code>color: inherit</code>; <code>text-decoration: none</code>. There's no global link hover; hovers are set per component.</td><td><code>_base.scss:28</code></td></tr>
+        <tr><td><code>button</code></td><td><code>font-family: inherit</code>; no border or background; <code>color: inherit</code>. line-height and font-size are <b>not</b> reset, so they come from the browser default.</td><td><code>_base.scss:37</code></td></tr>
+        <tr><td><code>input, textarea</code></td><td><code>font-family: inherit</code>; <code>font-size: 1rem</code>. line-height not set (browser default <code>normal</code>).</td><td><code>_base.scss:44</code></td></tr>
+      </tbody>
+    </table></div>
+
+    <h3 class="sg-h3">Type styles: live examples</h3>
+
+    <span class="sg-label"><code>h1.hero__heading</code>. White text, shown here on a dark doc panel</span>
+    <div class="sg-specimen sg-specimen--dark"><h1 class="hero__heading">Projects that last. Finished with Precision.</h1></div>
+
+    <span class="sg-label"><code>h2.heading-xl</code> with <code>&lt;strong&gt;</code></span>
+    <div class="sg-specimen"><h2 class="heading-xl">BBG<br><strong>Electrical</strong></h2></div>
+
+    <span class="sg-label"><code>h2.heading-lg</code> with and without <code>&lt;strong&gt;</code></span>
+    <div class="sg-specimen">
+      <h2 class="heading-lg">Explore our projects</h2>
+      <br>
+      <h2 class="heading-lg">Let's talk about <strong>your project</strong></h2>
+    </div>
+
+    <span class="sg-label"><code>p.lede</code></span>
+    <div class="sg-specimen"><p class="lede">We specialise in customised commercial electrical fitouts, switchboard upgrades and distribution work. Our team has spent years wiring offices, workshops and showrooms across the region, and that experience shows in the quality of the finish and the reliability of the systems we leave behind.</p></div>
+
+    <span class="sg-label"><code>.eyebrow</code> (with <code>::before</code> accent line)</span>
+    <div class="sg-specimen"><div class="eyebrow inline-flex items-center">Get in touch</div></div>
+
+    <span class="sg-label">Body text (inherits <code>body</code>)</span>
+    <div class="sg-specimen"><p>Body copy inherits 16px / 1.65 / 400 / #4a4a4a from <code>body</code>.</p></div>
+
+    <div class="sg-table-wrap"><table class="sg-table">
+      <thead><tr><th>Style</th><th>Declared</th><th>Mobile (390px)</th><th>Desktop (1440px)</th><th>Source</th></tr></thead>
+      <tbody>
+        <tr><td><code>.hero__heading</code></td><td><code>clamp(2.6rem, 6.5vw, 4rem)</code>; weight 600; line-height 1.08; letter-spacing -0.01em (h1 rule); white; max-width 16ch</td><td class="sg-diff">41.6px / lh 44.9px; max-width 100% (≤640px)</td><td class="sg-diff">64px / lh 69.1px (reaches max at ≈985px); max-width 16ch</td><td><code>_hero.scss:28</code>, <code>_responsive.scss:51</code></td></tr>
+        <tr><td><code>.heading-xl</code></td><td><code>clamp(2.2rem, 5vw, 3.4rem)</code>; weight 400; <code>strong</code> 700; lh 1.15; ls -0.01em; #232323</td><td class="sg-diff">35.2px / lh 40.5px</td><td class="sg-diff">54.4px / lh 62.6px (max at ≈1088px)</td><td><code>_base.scss:84</code></td></tr>
+        <tr><td><code>.heading-lg</code></td><td><code>clamp(1.9rem, 4vw, 2.6rem)</code>; weight 400; <code>strong</code> 700; lh 1.15; ls -0.01em. Colour comes from the <code>h2</code> rule (#232323), not from <code>.heading-lg</code>.</td><td class="sg-diff">30.4px / lh 35px</td><td class="sg-diff">41.6px / lh 47.8px (max at 1040px)</td><td><code>_base.scss:94</code></td></tr>
+        <tr><td><code>.lede</code></td><td>1.05rem; lh 1.65 (inherited); #4a4a4a; max-width 46ch; margin-top 1.4rem</td><td colspan="2">16.8px / lh 27.7px; max-width 565px; margin-top 22.4px (same at all widths)</td><td><code>_base.scss:103</code></td></tr>
+        <tr><td><code>.eyebrow</code></td><td>0.8rem; weight 600; uppercase; letter-spacing 0.14em; #6f6f6f; gap 0.6rem; margin-bottom 1.2rem. <code>::before</code>: 28×1px, <code>#d97f2c</code></td><td colspan="2">12.8px / lh 21.1px; ls 1.79px (same at all widths)</td><td><code>_base.scss:65-81</code></td></tr>
+        <tr><td><code>.feature-card h3</code></td><td>1.2rem; weight 500; lh 1.15 + ls -0.01em (h3 rule); margin-top 1.2rem</td><td colspan="2">19.2px / lh 22.1px</td><td><code>_features.scss:50</code></td></tr>
+        <tr><td><code>.feature-card p</code></td><td>0.95rem; #6f6f6f; margin-top 0.5rem; lh 1.65 (inherited)</td><td colspan="2">15.2px / lh 25.1px</td><td><code>_features.scss:56</code></td></tr>
+        <tr><td><code>.project-card__category</code></td><td>block; 0.95rem; #6f6f6f; margin-top 1.1rem</td><td colspan="2">15.2px / lh 25.1px</td><td><code>_projects.scss:28</code></td></tr>
+        <tr><td><code>.project-card__title</code></td><td>1.15rem; weight 700; #232323; margin-top 0.2rem</td><td colspan="2">18.4px / lh 30.4px. It's an inline <code>&lt;span&gt;</code>, so the declared margin-top has no visible effect.</td><td><code>_projects.scss:35</code></td></tr>
+        <tr><td>Uppercase label: <code>.contact-info__item span</code></td><td>block; 0.8rem; uppercase; <b>letter-spacing 0.1em</b>; #6f6f6f; margin-bottom 0.4rem</td><td colspan="2">12.8px; ls 1.28px</td><td><code>_contact.scss:20</code></td></tr>
+        <tr><td>Uppercase label: <code>.form-field label</code></td><td>block; 0.8rem; uppercase; <b>letter-spacing 0.08em</b>; #6f6f6f; margin-bottom 0.5rem</td><td colspan="2">12.8px; ls 1.02px</td><td><code>_contact.scss:45</code></td></tr>
+        <tr><td><code>.contact-info__item strong</code></td><td>1.2rem; weight 600; #232323</td><td colspan="2">19.2px / lh 31.7px</td><td><code>_contact.scss:29</code></td></tr>
+        <tr><td><code>.main-nav__list a</code></td><td>1rem; weight 600; white → #1c1c1c when header <code>.is-scrolled</code></td><td>hidden (&lt;1200px)</td><td>16px</td><td><code>_header.scss:62</code></td></tr>
+        <tr><td><code>.header-phone</code></td><td>1rem; weight 700; white → #1c1c1c scrolled</td><td>hidden (&lt;1200px)</td><td>16px</td><td><code>_header.scss:96</code></td></tr>
+        <tr><td><code>.nav-overlay__links a</code></td><td><code>clamp(2.2rem, 6vw, 3.6rem)</code>; weight 600; rgba(255,255,255,.5)</td><td class="sg-diff">35.2px</td><td class="sg-diff">57.6px</td><td><code>_header.scss:226</code></td></tr>
+        <tr><td><code>.nav-overlay__meta</code> / <code>strong</code></td><td>0.95rem rgba(255,255,255,.55) / <code>strong</code>: block, 1.1rem, white, margin-bottom 0.3rem</td><td colspan="2">15.2px / 17.6px</td><td><code>_header.scss:239-250</code></td></tr>
+        <tr><td><code>.hero__tags</code></td><td>1rem; white</td><td colspan="2">16px / lh 26.4px</td><td><code>_hero.scss:36</code></td></tr>
+        <tr><td><code>.footer-col h4</code></td><td>1.05rem; weight 600; white; lh 1.15 (h4 rule); margin-bottom 1.3rem</td><td colspan="2">16.8px / lh 19.3px (mobile spacing in <a href="#sg-footer">Footer</a>)</td><td><code>_footer.scss:27</code></td></tr>
+        <tr><td><code>.footer-col a</code></td><td>0.95rem; inherits rgba(255,255,255,.65)</td><td colspan="2">15.2px</td><td><code>_footer.scss:41</code></td></tr>
+        <tr><td><code>.footer-brand p</code></td><td>0.95rem; max-width 32ch</td><td colspan="2">15.2px</td><td><code>_footer.scss:23</code></td></tr>
+        <tr><td><code>.footer-note</code></td><td>0.85rem; rgba(255,255,255,.4)</td><td colspan="2">13.6px / lh 22.4px</td><td><code>_footer.scss:69</code></td></tr>
+      </tbody>
+    </table></div>
+    <span class="sg-flag"><strong>Resolved, label letter-spacing:</strong> you chose <b>0.1rem</b> (1.6px) as the reference letter-spacing for the small uppercase labels. Neither existing rule uses it: <code>.contact-info__item span</code> has 0.1em (1.28px) and <code>.form-field label</code> has 0.08em (1.02px). Both are flagged as deviations; the source is unchanged.</span>
+    <span class="sg-flag"><strong>Resolved, footer list text:</strong> the reference is <b>0.95rem</b> (<code>.footer-col a</code>). The plain-text items in the "Contact Us" column have no font-size rule and inherit 16px from <code>body</code>, which is a deviation.</span>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<section class="sg-section" id="sg-layout">
+  <div class="sg-wrap">
+    <h2>Layout &amp; spacing</h2>
+    <h3 class="sg-h3">Container &amp; sections</h3>
+    <div class="sg-table-wrap"><table class="sg-table">
+      <thead><tr><th>Selector</th><th>Declared</th><th>Mobile (390px)</th><th>Desktop (1440px)</th><th>Source</th></tr></thead>
+      <tbody>
+        <tr><td><code>.container</code></td><td>width 100%; max-width 1600px; margin 0 auto; padding <code>0 6vw</code></td><td class="sg-diff">side padding 23.4px; content 343px</td><td class="sg-diff">side padding 86.4px; content 1267px</td><td><code>_base.scss:57</code></td></tr>
+        <tr><td><code>.section</code></td><td>position relative; padding <code>clamp(4rem, 9vw, 7.5rem) 0</code></td><td class="sg-diff">64px top/bottom (minimum up to ≈711px)</td><td class="sg-diff">120px top/bottom (maximum from ≈1334px)</td><td><code>_base.scss:116</code></td></tr>
+        <tr><td><code>.section--cream</code></td><td>background #f4f1ec</td><td colspan="2">Brands and Instagram sections</td><td><code>_base.scss:121</code></td></tr>
+        <tr><td><code>.hero</code></td><td>min-height 100vh; flex; <code>items-end</code>; bg cover/center; overflow hidden. Not a <code>.section</code>.</td><td colspan="2">Full viewport height. Content sits at the bottom with padding-bottom 4.5rem (72px)</td><td><code>_hero.scss:4</code></td></tr>
+      </tbody>
+    </table></div>
+    <span class="sg-note">Tailwind's own <code>.container</code> utility (layered) also matches this class name. The Sass <code>.container</code> is unlayered, so its <code>max-width: 1600px</code> wins at every width. Tailwind's container max-widths never apply.</span>
+
+    <h3 class="sg-h3">Gaps, margins and grids in use</h3>
+    <div class="sg-table-wrap"><table class="sg-table">
+      <thead><tr><th>Where</th><th>Value</th><th>Mobile (390px)</th><th>Desktop (1440px)</th><th>Source</th></tr></thead>
+      <tbody>
+        <tr><td>Brands list</td><td><code>gap-6</code> → <code>lg:gap-8</code></td><td class="sg-diff">24px, column</td><td class="sg-diff">32px, row</td><td><code>index.html</code> (Tailwind)</td></tr>
+        <tr><td>Services row (text block + cards)</td><td><code>gap-16</code>; <code>flex-wrap</code> → <code>lg:flex-nowrap</code>; <code>items-end justify-between</code></td><td class="sg-diff">64px; text above, cards below</td><td class="sg-diff">64px; text left (344px), cards right</td><td>Tailwind</td></tr>
+        <tr><td>Feature-card wrapper</td><td><code>gap-16</code> → <code>lg:gap-8</code>; <code>flex-wrap</code> → <code>md:flex-nowrap</code></td><td class="sg-diff">64px, cards stack</td><td class="sg-diff">32px, 3 cards in a row (also a single row at 768-1199px, with a 64px gap)</td><td>Tailwind</td></tr>
+        <tr><td><code>.btn-row</code></td><td><code>gap-4</code>; <code>flex-wrap</code>; margin-top 2.2rem</td><td colspan="2">16px gap; 35.2px top margin. Wraps to a second, left-aligned row when the buttons don't fit (≈ below 360px)</td><td><code>_buttons.scss:51</code> + Tailwind</td></tr>
+        <tr><td><code>.projects-head</code></td><td>margin-bottom <code>clamp(2.5rem, 5vw, 3.5rem)</code>; inner block <code>flex flex-col items-start gap-4</code></td><td class="sg-diff">40px</td><td class="sg-diff">56px</td><td><code>_projects.scss:5</code></td></tr>
+        <tr><td><code>.projects-track</code></td><td><code>grid grid-cols-1 gap-7 md:grid-cols-5</code></td><td class="sg-diff">1 column, 28px gap</td><td class="sg-diff">5 columns × 231px, 28px gap (5 columns from 768px)</td><td>Tailwind</td></tr>
+        <tr><td><code>.instagram__head</code></td><td><code>flex flex-wrap items-end justify-between gap-8</code>; margin-bottom <code>clamp(2rem, 4vw, 3rem)</code></td><td class="sg-diff">32px gap; 32px bottom</td><td class="sg-diff">32px gap; 48px bottom</td><td><code>_instagram.scss:4</code></td></tr>
+        <tr><td><code>.contact-grid</code></td><td>grid 1fr 1fr; gap <code>clamp(2.5rem, 6vw, 5rem)</code>; inline <code>style="margin-top:2.5rem"</code></td><td class="sg-diff">1 column (≤960px); 40px gap</td><td class="sg-diff">2 columns; 80px gap</td><td><code>_contact.scss:4</code></td></tr>
+        <tr><td><code>.form-row</code></td><td>grid 1fr 1fr; gap 1.1rem</td><td class="sg-diff">1 column (≤640px)</td><td class="sg-diff">2 columns</td><td><code>_contact.scss:35</code></td></tr>
+        <tr><td><code>.footer-top</code></td><td>grid <code>1.3fr 1fr 1fr 1fr</code>; gap 2.5rem; padding-bottom 3rem</td><td class="sg-diff">1 column (≤640px)</td><td class="sg-diff">4 columns (2 columns at 641-960px, brand spans both)</td><td><code>_footer.scss:10</code></td></tr>
+        <tr><td><code>.nav-overlay .container</code></td><td><code>flex flex-col items-start</code>; gap 3.2rem; links gap 0.6rem; meta <code>gap-12</code> (3rem), wraps</td><td colspan="2">Same at all widths</td><td><code>_header.scss:216-237</code></td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<section class="sg-section" id="sg-buttons">
+  <div class="sg-wrap">
+    <h2>Buttons</h2>
+    <p class="sg-lead">Base class <code>.btn</code> (<code>src/styles/_buttons.scss</code>) plus Tailwind <code>inline-flex items-center</code> in the markup. There are two colour variants: <code>.btn--dark</code> and <code>.btn--outline</code>. Hover the live examples to see their hover states.</p>
+
+    <span class="sg-label"><code>a.btn.btn--dark</code> with arrow icon. <b>Reference height 58.7px</b></span>
+    <div class="sg-specimen">
+      <a href="projects.html" class="btn btn--dark inline-flex items-center">
+        View all projects
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg>
+      </a>
+    </div>
+
+    <span class="sg-label"><code>.btn-row</code> containing <code>.btn--dark</code> + <code>.btn--outline</code> (context radius: first child <code>0 0 0 16px</code>, last child <code>0 16px 0 0</code>). This doc frame is narrower than the page container, so on small screens it may show the wrapped, left-aligned second row earlier than index.html does (on the homepage the row fits on one line at 390px)</span>
+    <div class="sg-specimen">
+      <div class="btn-row flex flex-wrap gap-4">
+        <a href="#services" class="btn btn--dark inline-flex items-center">
+          Our services
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg>
+        </a>
+        <a href="tel:0413681506" class="btn btn--outline inline-flex items-center">0413 681 506</a>
+      </div>
+    </div>
+
+    <span class="sg-label"><code>button.btn.btn--dark</code> (form submit) <span class="sg-tag sg-tag--flag">deviation: 52.6px tall</span></span>
+    <div class="sg-specimen">
+      <button type="button" class="btn btn--dark inline-flex items-center">
+        Send enquiry
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg>
+      </button>
+    </div>
+
+    <div class="sg-table-wrap"><table class="sg-table">
+      <thead><tr><th>Part / state</th><th>Values</th><th>Source</th></tr></thead>
+      <tbody>
+        <tr><td><code>.btn</code></td><td>inline-flex, items-center; gap 0.9rem (14.4px); padding 1.05rem 1.7rem (16.8px 27.2px); 0.95rem (15.2px); weight 600; nowrap. Radius 0 (none set). Transition background, colour, border-colour, transform 0.4s <code>cubic-bezier(0.65,0,0.35,1)</code>. Same at all widths.</td><td><code>_buttons.scss:4</code></td></tr>
+        <tr><td><code>.btn svg</code></td><td>16×16px; flex-shrink 0; transform transition 0.4s</td><td><code>_buttons.scss:13</code></td></tr>
+        <tr><td><code>.btn--dark</code></td><td>bg #1c1c1c; text #fff; no border</td><td><code>_buttons.scss:20</code></td></tr>
+        <tr><td><code>.btn--dark:hover</code></td><td>bg #d97f2c; <code>translateY(-2px)</code>; icon <code>translate(2px,-2px)</code></td><td><code>_buttons.scss:25-32</code></td></tr>
+        <tr><td><code>.btn--outline</code></td><td>transparent bg; 1px solid rgba(0,0,0,.35); text #232323</td><td><code>_buttons.scss:33</code></td></tr>
+        <tr><td><code>.btn--outline:hover</code></td><td>border and text #d97f2c (no transform)</td><td><code>_buttons.scss:38</code></td></tr>
+        <tr><td><code>.btn-row .btn:first-child</code> / <code>:last-child</code></td><td>border-radius <code>0 0 0 16px</code> / <code>0 16px 0 0</code> (<code>$radius-first</code> / <code>$radius-last</code>)</td><td><code>_buttons.scss:55-61</code></td></tr>
+        <tr><td>Focus</td><td>No custom <code>:focus</code> / <code>:focus-visible</code> style for <code>.btn</code>; the browser default focus ring applies.</td><td>-</td></tr>
+        <tr><td>Rendered size</td><td><b><code>&lt;a&gt;</code>: 58.7px tall (reference).</b> Line-height 25.08px is inherited from <code>body</code> (1.65). Widths depend on the label, e.g. "View all projects" 204.4px.</td><td>computed</td></tr>
+      </tbody>
+    </table></div>
+    <span class="sg-flag"><strong>Deviations from the 58.7px reference (you chose the &lt;a&gt; height as the reference):</strong><br>
+      • <code>&lt;button&gt;</code> "Send enquiry" is 52.6px tall. Its line-height is the browser default <code>normal</code>, because the <code>button</code> reset (<code>_base.scss:37</code>) doesn't set line-height.<br>
+      • In <code>.btn-row</code>, "Our services" (<code>.btn--dark</code>) is 60.7px tall. The flex row stretches it to match the 1px-bordered <code>.btn--outline</code> next to it (58.7 + 2px border).</span>
+
+    <h3 class="sg-h3">Circular icon buttons</h3>
+    <span class="sg-label"><code>.footer-social .icon-circle</code>. The only <code>.icon-circle</code> context on the homepage (shown in the footer's dark context)</span>
+    <div class="sg-specimen sg-specimen--footer">
+      <div class="site-footer" style="padding:0;background:transparent"><div class="footer-social flex items-center" style="border-top:0;padding:0">
+        <a class="icon-circle inline-flex items-center justify-center" href="#" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M15 8h2V5h-2a4 4 0 00-4 4v2H9v3h2v7h3v-7h2.5l.5-3H14V9a1 1 0 011-1z"/></svg>
+        </a>
+        <a class="icon-circle inline-flex items-center justify-center" href="https://www.instagram.com/bbg_electrical/" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg>
+        </a>
+        <a class="icon-circle inline-flex items-center justify-center" href="#" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M7 10v7M7 7v.01M11 17v-4.5a2.5 2.5 0 015 0V17M11 10v7"/></svg>
+        </a>
+      </div></div>
+    </div>
+    <span class="sg-note">This example sets inline <code>padding:0; background:transparent</code> on the <code>.site-footer</code> wrapper and removes the <code>.footer-social</code> border and padding inline, so only the buttons show. The buttons themselves are unchanged.</span>
+    <div class="sg-table-wrap"><table class="sg-table">
+      <thead><tr><th>Button</th><th>Size</th><th>Border</th><th>Icon</th><th>Hover / focus</th><th>Source</th></tr></thead>
+      <tbody>
+        <tr><td><code>.icon-circle</code> (footer)</td><td>52×52px, radius 50%</td><td>1px rgba(255,255,255,.25) (footer override of base rgba(0,0,0,.15))</td><td>18×18px, stroke 1.6, white</td><td>hover: bg + border #d97f2c, text #fff, <code>translateY(-2px)</code></td><td><code>_buttons.scss:63</code>, <code>_footer.scss:64</code></td></tr>
+        <tr><td><code>.hamburger</code> (header, &lt;1200px)</td><td>46×46px, radius 50%</td><td>1px rgba(255,255,255,.5); scrolled rgba(0,0,0,.25); menu-open rgba(255,255,255,.6)</td><td>3 bars 18×2px, gap 5px, white (scrolled #1c1c1c)</td><td>menu-open: bars become an ×. No hover style.</td><td><code>_header.scss:120</code></td></tr>
+        <tr><td><code>.nav-close</code> (overlay)</td><td>46×46px, radius 50%</td><td>1px rgba(255,255,255,.6)</td><td>Lucide "x", 20×20px</td><td>hover / focus-visible: bg #fff, text #1c1c1c, <code>rotate(90deg)</code></td><td><code>_header.scss:188</code></td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<section class="sg-section" id="sg-forms">
+  <div class="sg-wrap">
+    <h2>Form fields</h2>
+    <p class="sg-lead">From the contact form. Click into a field to see the focus state.</p>
+    <div class="sg-specimen">
+      <form action="#" onsubmit="return false">
+        <div class="form-row">
+          <div class="form-field">
+            <label for="sg-name">Name</label>
+            <input type="text" id="sg-name" name="name">
+          </div>
+          <div class="form-field">
+            <label for="sg-phone">Phone</label>
+            <input type="tel" id="sg-phone" name="phone">
+          </div>
+        </div>
+        <div class="form-field">
+          <label for="sg-message">Tell us about the job</label>
+          <textarea id="sg-message" name="message"></textarea>
+        </div>
+      </form>
+    </div>
+    <div class="sg-table-wrap"><table class="sg-table">
+      <thead><tr><th>Selector / state</th><th>Values</th><th>Source</th></tr></thead>
+      <tbody>
+        <tr><td><code>.form-field</code></td><td>margin-bottom 1.1rem (17.6px)</td><td><code>_contact.scss:41</code></td></tr>
+        <tr><td><code>.form-field input, textarea</code></td><td>width 100%; 1px solid #e2ddd3; bg #fff; radius 16px (<code>$radius-sm</code>); padding 0.9rem 1.1rem (14.4px 17.6px); text #232323; 16px; border-colour transition 0.4s. Input renders 51.8px tall (line-height = browser <code>normal</code>).</td><td><code>_contact.scss:54</code></td></tr>
+        <tr><td><code>:focus</code></td><td><code>outline: none</code>; border-colour #d97f2c</td><td><code>_contact.scss:64</code></td></tr>
+        <tr><td><code>textarea</code></td><td>resize vertical; min-height 120px</td><td><code>_contact.scss:70</code></td></tr>
+        <tr><td><code>.form-row</code></td><td>2 columns, gap 1.1rem → 1 column at ≤640px</td><td><code>_contact.scss:35</code>, <code>_responsive.scss</code></td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<section class="sg-section" id="sg-images">
+  <div class="sg-wrap">
+    <h2>Images</h2>
+    <p class="sg-lead">Global rule <code>img { max-width: 100%; display: block; }</code> (<code>_base.scss:23</code>). No image on the homepage has a border or border-radius, and none sets <code>object-position</code>, so it stays at the default <code>50% 50%</code>.</p>
+    <div class="sg-table-wrap"><table class="sg-table">
+      <thead><tr><th>Image</th><th>Asset (intrinsic)</th><th>Sizing &amp; crop</th><th>Mobile (390px)</th><th>Desktop (1440px)</th><th>Source</th></tr></thead>
+      <tbody>
+        <tr><td>Hero background</td><td><code>/assets/img/hero.webp</code> 1345×1170</td><td>CSS background (inline <code>style</code>), <code>cover</code>, <code>center</code>, plus <code>.hero::after</code> gradient</td><td colspan="2">Fills 100% width × ≥100vh</td><td><code>_hero.scss:4</code></td></tr>
+        <tr><td>Header logo</td><td><code>/assets/img/logo.png</code> 712×450</td><td>height 80px, width auto. White via <code>filter: brightness(0) invert(1)</code> until <code>.is-scrolled</code> / <code>.menu-open</code></td><td colspan="2">126.6×80px</td><td><code>_header.scss:28-41</code></td></tr>
+        <tr><td>Footer logo</td><td>same <code>logo.png</code></td><td>height 42px; always inverted (white); margin-bottom 1.2rem</td><td colspan="2">66.5×42px</td><td><code>_footer.scss:17</code></td></tr>
+        <tr><td>Brand logos</td><td>SVGs in <code>/assets/img/brands/</code></td><td>height via <code>--logo-height</code> (ABB 2.5rem, Schneider 3.5rem, Hager 4rem, Legrand 2.75rem); width auto; max-width 100%; <code>object-fit: contain</code></td><td colspan="2">101×40, 181×56, 169×64, 167×44px</td><td><code>_about.scss:12-21</code></td></tr>
+        <tr><td><code>.feature-card__media img</code></td><td>project-30 (1350×1800 portrait), project-26, project-04 (1800×1350)</td><td>Box: fixed <b>height 500px</b>, width = card width, overflow hidden. Image 100%×100%, <code>object-fit: cover</code>. Hover: <code>scale(1.05)</code>, 0.6s</td><td class="sg-diff">343×500px</td><td class="sg-diff">277 / 272 / 246 × 500px</td><td><code>_features.scss:30-45</code></td></tr>
+        <tr><td><code>.project-card__media img</code></td><td>project-02, 13, 04, 35, 30</td><td>Box: <code>aspect-ratio 4/3</code>, overflow hidden. Image 100%×100%, cover. Hover: <code>scale(1.05)</code>, 0.6s</td><td class="sg-diff">343×257px</td><td class="sg-diff">231×173px</td><td><code>_projects.scss:9-24</code></td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<section class="sg-section" id="sg-header">
+  <div class="sg-wrap">
+    <h2>Header &amp; navigation</h2>
+    <p class="sg-lead"><code>.site-header</code> is <code>position: fixed</code> (z-index 100). Each example below sits in a frame that contains the fixed element. Under 1200px you'll see the hamburger; at 1200px and up, <code>.main-nav</code> and <code>.header-phone</code> replace it.</p>
+
+    <span class="sg-label">State: default, transparent over the hero. Logo inverted, links and phone white (shown with the hero below)</span>
+  </div>
+    <div class="sg-frame">
+      <header class="site-header">
+        <div class="container flex items-center justify-between">
+          <a href="index.html" class="logo flex items-center"><img src="/assets/img/logo.png" alt="BBG Electrical"></a>
+          <nav class="main-nav" aria-label="Main menu (example)">
+            <ul class="main-nav__list flex items-center">
+              <li><a href="#services">Services</a></li>
+              <li><a href="projects.html">Projects</a></li>
+              <li><a href="#about">About Us</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
+          </nav>
+          <a href="tel:0413681506" class="header-phone">0413 681 506</a>
+          <button class="hamburger inline-flex flex-col items-center justify-center" type="button" aria-label="Open menu (example)" aria-expanded="false"><span></span><span></span><span></span></button>
+        </div>
+      </header>
+      <section class="hero flex items-end" id="sg-hero" style="background-image:url('/assets/img/hero.webp')">
+        <div class="container">
+          <h1 class="hero__heading">Projects that last. Finished with Precision.</h1>
+          <div class="hero__tags flex flex-wrap items-center">
+            <span>Residential</span>
+            <span class="sep"></span>
+            <span>Commercial</span>
+            <span class="sep"></span>
+            <span>Smart Homes</span>
+            <span class="rule"></span>
+          </div>
+        </div>
+      </section>
+    </div>
+  <div class="sg-wrap">
+    <span class="sg-label">State: <code>.site-header.is-scrolled</code> (added by main.js when <code>scrollY &gt; 40</code>)</span>
+  </div>
+    <div class="sg-frame sg-frame--scrolled">
+      <header class="site-header is-scrolled">
+        <div class="container flex items-center justify-between">
+          <a href="index.html" class="logo flex items-center"><img src="/assets/img/logo.png" alt="BBG Electrical"></a>
+          <nav class="main-nav" aria-label="Main menu (example, scrolled)">
+            <ul class="main-nav__list flex items-center">
+              <li><a href="#services">Services</a></li>
+              <li><a href="projects.html">Projects</a></li>
+              <li><a href="#about">About Us</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
+          </nav>
+          <a href="tel:0413681506" class="header-phone">0413 681 506</a>
+          <button class="hamburger inline-flex flex-col items-center justify-center" type="button" aria-label="Open menu (example)" aria-expanded="false"><span></span><span></span><span></span></button>
+        </div>
+      </header>
+    </div>
+  <div class="sg-wrap">
+    <span class="sg-label">State: <code>.site-header.menu-open</code> + <code>.nav-overlay.is-open</code> (hamburger clicked). Hover the overlay links and close button to see their hover states</span>
+  </div>
+    <div class="sg-frame sg-frame--menu">
+      <header class="site-header menu-open">
+        <div class="container flex items-center justify-between">
+          <a href="index.html" class="logo flex items-center"><img src="/assets/img/logo.png" alt="BBG Electrical"></a>
+          <nav class="main-nav" aria-label="Main menu (example, menu open)">
+            <ul class="main-nav__list flex items-center">
+              <li><a href="#services">Services</a></li>
+              <li><a href="projects.html">Projects</a></li>
+              <li><a href="#about">About Us</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
+          </nav>
+          <a href="tel:0413681506" class="header-phone">0413 681 506</a>
+          <button class="hamburger inline-flex flex-col items-center justify-center" type="button" aria-label="Close menu (example)" aria-expanded="true"><span></span><span></span><span></span></button>
+        </div>
+      </header>
+      <nav class="nav-overlay flex items-center justify-center is-open" aria-label="Overlay menu (example)">
+        <div class="nav-overlay__top flex items-center justify-end">
+          <button class="nav-close inline-flex items-center justify-center" type="button" aria-label="Close menu (example)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+          </button>
+        </div>
+        <div class="container flex flex-col items-start">
+          <div class="nav-overlay__links flex flex-col">
+            <a href="index.html">Home</a>
+            <a href="#about">About</a>
+            <a href="#services">Services</a>
+            <a href="projects.html">Projects</a>
+            <a href="#contact">Contact</a>
+          </div>
+          <div class="nav-overlay__meta flex flex-wrap gap-12">
+            <div><strong>Phone</strong>0413 681 506</div>
+            <div><strong>Email</strong>info@bbgelectrical.com.au</div>
+            <div><strong>Follow</strong>Facebook · Instagram · LinkedIn</div>
+          </div>
+        </div>
+      </nav>
+    </div>
+  <div class="sg-wrap">
+    <div class="sg-table-wrap"><table class="sg-table">
+      <thead><tr><th>Part</th><th>Mobile (&lt;1200px; 390px measured)</th><th>Desktop (≥1200px; 1440px measured)</th><th>Source</th></tr></thead>
+      <tbody>
+        <tr><td><code>.site-header</code></td><td colspan="2">fixed, top/left/right 0, z-index 100; padding 1.6rem 0 (25.6px) → <code>.is-scrolled</code> 1rem 0. Rendered height 131.2px unscrolled. Transitions 0.4s.</td><td><code>_header.scss:4</code></td></tr>
+        <tr><td>Row (<code>.container</code>)</td><td colspan="2"><code>flex items-center justify-between</code>; position relative</td><td>Tailwind + <code>_header.scss:14</code></td></tr>
+        <tr><td><code>.logo img</code></td><td colspan="2">80px tall (126.6px wide) at all widths</td><td><code>_header.scss:28</code></td></tr>
+        <tr><td><code>.main-nav</code></td><td class="sg-diff"><code>display: none</code></td><td class="sg-diff">block; absolutely centred (<code>left/top 50%</code>, <code>translate(-50%,-50%)</code>); list gap 2.4rem. Hidden (<code>visibility</code>) when <code>.menu-open</code>.</td><td><code>_header.scss:46</code></td></tr>
+        <tr><td><code>.main-nav__list a</code> hover</td><td class="sg-diff">-</td><td class="sg-diff">2px <code>currentColor</code> underline at bottom -0.35rem, <code>scaleX(0→1)</code> from the left on <code>:hover</code> / <code>:focus-visible</code></td><td><code>_header.scss:70-86</code></td></tr>
+        <tr><td><code>.header-phone</code></td><td class="sg-diff"><code>display: none</code></td><td class="sg-diff">block; margin-left auto; hover / focus-visible #d97f2c</td><td><code>_header.scss:96</code></td></tr>
+        <tr><td><code>.hamburger</code></td><td class="sg-diff">shown, 46px circle</td><td class="sg-diff"><code>display: none</code></td><td><code>_header.scss:120, 260</code></td></tr>
+        <tr><td><code>.nav-overlay</code></td><td colspan="2">fixed inset 0, z-index 200, bg #1c1c1c, centred. Closed: opacity 0, hidden (0.5s fade). <code>.is-open</code>: opacity 1, visible immediately. The close row mirrors the header row (top 1.6rem, height 80px, max-width 1600px, padding 0 6vw). Links hover: white + padding-left 0.5rem.</td><td><code>_header.scss:168-250</code></td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<section class="sg-section" id="sg-hero-doc">
+  <div class="sg-wrap">
+    <h2 id="sg-hero-title">Hero</h2>
+    <p class="sg-lead">The live hero is shown above, under the default header state. Its structure: <code>section.hero.flex.items-end</code> &gt; <code>.container</code> &gt; <code>h1.hero__heading</code> + <code>.hero__tags</code>.</p>
+    <div class="sg-table-wrap"><table class="sg-table">
+      <thead><tr><th>Part</th><th>Mobile (390px)</th><th>Desktop (1440px)</th><th>Source</th></tr></thead>
+      <tbody>
+        <tr><td><code>.hero</code></td><td colspan="2">min-height 100vh; content aligned to the bottom; background cover/center; <code>::after</code> overlay gradient (z-index 1)</td><td><code>_hero.scss:4-14</code></td></tr>
+        <tr><td><code>.hero .container</code></td><td colspan="2">position relative; z-index 2; padding-bottom 4.5rem (72px)</td><td><code>_hero.scss:20</code></td></tr>
+        <tr><td><code>.hero__heading</code></td><td class="sg-diff">41.6px; full width (max-width 100%); 3 lines</td><td class="sg-diff">64px; max-width 16ch (733px); 2 lines</td><td><code>_hero.scss:28</code></td></tr>
+        <tr><td><code>.hero__tags</code></td><td class="sg-diff">wraps onto 2 lines (70.4px tall); <code>.rule</code> hidden</td><td class="sg-diff">single line; <code>.rule</code> fills the remaining width (flex 1, min 60px, 1px rgba(255,255,255,.35))</td><td><code>_hero.scss:36-49</code>, <code>_responsive.scss:55</code></td></tr>
+        <tr><td><code>.hero__tags .sep</code></td><td colspan="2">1×16px, rgba(255,255,255,.4); gap 1.1rem; tags margin-top 2.4rem</td><td><code>_hero.scss:38</code></td></tr>
+      </tbody>
+    </table></div>
+    <span class="sg-note"><code>@keyframes bob</code> is defined in <code>_hero.scss:51</code>, but nothing on the homepage uses it.</span>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<section class="sg-section" id="sg-brands">
+  <div class="sg-wrap">
+    <h2>Brand logos</h2>
+    <p class="sg-lead"><code>section.section.section--cream.brands</code>. Column at &lt;1200px; centred row at ≥1200px.</p>
+  </div>
+  <section class="section section--cream brands" aria-label="Brands we install (example)">
+    <div class="container">
+      <ul class="brands__list flex flex-col items-center gap-6 lg:flex-row lg:items-center lg:justify-center lg:gap-8">
+        <li class="brands__item"><img class="brands__logo brands__logo--abb" src="/assets/img/brands/abb.svg" alt="ABB logo" width="101" height="40"></li>
+        <li class="brands__item"><img class="brands__logo brands__logo--schneider" src="/assets/img/brands/schneider-electric.svg" alt="Schneider Electric logo" width="181" height="56"></li>
+        <li class="brands__item"><img class="brands__logo brands__logo--hager" src="/assets/img/brands/hager.svg" alt="Hager logo" width="169" height="64"></li>
+        <li class="brands__item"><img class="brands__logo brands__logo--legrand" src="/assets/img/brands/legrand.svg" alt="Legrand logo" width="167" height="44"></li>
+      </ul>
+    </div>
+  </section>
+  <div class="sg-wrap">
+    <div class="sg-table-wrap"><table class="sg-table">
+      <thead><tr><th>Property</th><th>Mobile (&lt;1200px)</th><th>Desktop (≥1200px)</th><th>Source</th></tr></thead>
+      <tbody>
+        <tr><td>Direction / alignment</td><td class="sg-diff">column, items centred</td><td class="sg-diff">row, centred horizontally and vertically</td><td>Tailwind</td></tr>
+        <tr><td>Gap</td><td class="sg-diff"><code>gap-6</code> 24px</td><td class="sg-diff"><code>gap-8</code> 32px</td><td>Tailwind</td></tr>
+        <tr><td>Logo heights</td><td colspan="2">ABB 2.5rem · Schneider Electric 3.5rem · Hager 4rem · Legrand 2.75rem (<code>.brands__logo--*</code>, default 3rem); width auto, max-width 100%, contain</td><td><code>_about.scss:12-21</code></td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<section class="sg-section" id="sg-services">
+  <div class="sg-wrap">
+    <h2>Services block &amp; feature cards</h2>
+    <p class="sg-lead"><code>section.section#services</code>: text block (<code>.split__content</code>) and three <code>.feature-card</code>s. The <code>js-reveal</code> classes are left off here so all content shows (see <a href="#sg-motion">Motion</a>).</p>
+  </div>
+  <section class="section" aria-label="Services (example)">
+    <div class="container">
+      <div class="flex flex-wrap items-end justify-between gap-16 md:flex-row lg:flex-nowrap">
+        <div class="split__content">
+          <h2 class="heading-xl">BBG<br><strong>Electrical</strong></h2>
+          <p class="lede">We specialise in customised commercial electrical fitouts, switchboard upgrades and distribution work. Our team has spent years wiring offices, workshops and showrooms across the region, and that experience shows in the quality of the finish and the reliability of the systems we leave behind.</p>
+          <div class="btn-row flex flex-wrap gap-4">
+            <a href="#services" class="btn btn--dark inline-flex items-center">
+              Our services
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg>
+            </a>
+            <a href="tel:0413681506" class="btn btn--outline inline-flex items-center">0413 681 506</a>
+          </div>
+        </div>
+        <div class="flex flex-wrap md:flex-nowrap gap-16 lg:gap-8">
+          <div class="feature-card">
+            <div class="feature-card__media"><img src="/assets/img/projects/project-30.jpg" alt="Precision switchboard wiring"></div>
+            <h3>Residential</h3>
+            <p>Complete electrical installations for new homes and major renovations, from initial wiring to architectural lighting and final fit-offs. We work closely with builders and homeowners to deliver thoughtfully planned, high-quality results, inside and out.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-card__media"><img src="/assets/img/projects/project-26.jpg" alt="Modern commercial fitout"></div>
+            <h3>Commercial</h3>
+            <p>Electrical installations for office, retail and commercial fit-outs, including power distribution, lighting and data cabling. We coordinate with builders and other trades to keep projects running smoothly and deliver reliable, professional finishes.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-card__media"><img src="/assets/img/projects/project-04.jpg" alt="Large scale workshop electrical"></div>
+            <h3>Smart Homes</h3>
+            <p>Smart lighting, home automation and integrated electrical systems designed around the way you live. We combine modern technology with careful installation to create intuitive, connected homes ready for the future.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="sg-wrap">
+    <div class="sg-table-wrap"><table class="sg-table">
+      <thead><tr><th>Property</th><th>Mobile (390px)</th><th>Tablet (768-1199px)</th><th>Desktop (1440px)</th></tr></thead>
+      <tbody>
+        <tr><td>Text block vs cards</td><td class="sg-diff">Stacked: text, then cards</td><td class="sg-diff">Stacked: text (565px wide), then cards</td><td class="sg-diff">Side by side, bottom-aligned (<code>items-end</code>); text 344px</td></tr>
+        <tr><td>Cards</td><td class="sg-diff">One per row, 343px wide, 64px gap</td><td class="sg-diff">3 in a row, 64px gap</td><td class="sg-diff">3 in a row, 32px gap</td></tr>
+        <tr><td>Card width</td><td class="sg-diff">343px each</td><td class="sg-diff">191 / 188 / 169px (at 768px)</td><td class="sg-diff">277 / 272 / 246px</td></tr>
+        <tr><td>Image box</td><td colspan="3">500px tall at all widths; image <code>cover</code>; hover zoom <code>scale(1.05)</code></td></tr>
+      </tbody>
+    </table></div>
+    <span class="sg-flag"><strong>Inconsistencies (you confirmed these are unintentional; documented as one component):</strong><br>
+      • On <code>index.html</code> the first <code>.feature-card</code> has no <code>js-reveal</code>, so it shows immediately. The other two have <code>js-reveal</code> and fade in on scroll.<br>
+      • The cards have no set width, so their width follows their text length. That's why the widths differ (see table).</span>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<section class="sg-section" id="sg-projects">
+  <div class="sg-wrap">
+    <h2>Projects block &amp; project cards</h2>
+    <p class="sg-lead"><code>section.section#projects</code>. One column below 768px; five columns from 768px (<code>md:grid-cols-5</code>).</p>
+  </div>
+  <section class="section" aria-label="Projects (example)">
+    <div class="container">
+      <div class="projects-head flex flex-wrap items-end justify-between gap-8">
+        <div class="gap-4 flex items-start flex-col">
+          <h2 class="heading-lg">Explore our projects</h2>
+          <a href="projects.html" class="btn btn--dark inline-flex items-center">
+            View all projects
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="projects-track grid grid-cols-1 gap-7 md:grid-cols-5">
+        <div class="project-card"><div class="project-card__media"><img src="/assets/img/projects/project-02.jpg" alt="Project photo"></div><span class="project-card__category">Commercial Fitout</span><span class="project-card__title">Reception &amp; Office Fitout</span></div>
+        <div class="project-card"><div class="project-card__media"><img src="/assets/img/projects/project-13.jpg" alt="Project photo"></div><span class="project-card__category">Switchboard Upgrade</span><span class="project-card__title">Main Distribution Board</span></div>
+        <div class="project-card"><div class="project-card__media"><img src="/assets/img/projects/project-04.jpg" alt="Project photo"></div><span class="project-card__category">Workshop &amp; Showroom</span><span class="project-card__title">Vehicle Showroom Lighting</span></div>
+        <div class="project-card"><div class="project-card__media"><img src="/assets/img/projects/project-35.jpg" alt="Project photo"></div><span class="project-card__category">Commercial Fitout</span><span class="project-card__title">Kitchen &amp; Amenities</span></div>
+        <div class="project-card"><div class="project-card__media"><img src="/assets/img/projects/project-30.jpg" alt="Project photo"></div><span class="project-card__category">Switchboard Upgrade</span><span class="project-card__title">HVAC Control Panel</span></div>
+      </div>
+    </div>
+  </section>
+  <div class="sg-wrap">
+    <div class="sg-table-wrap"><table class="sg-table">
+      <thead><tr><th>Property</th><th>Mobile (&lt;768px; 390px)</th><th>≥768px (1440px measured)</th><th>Source</th></tr></thead>
+      <tbody>
+        <tr><td>Grid</td><td class="sg-diff">1 column, 28px gap</td><td class="sg-diff">5 equal columns, 28px gap (231px each at 1440px; 113px at 768px, where labels wrap onto 2 lines)</td><td>Tailwind</td></tr>
+        <tr><td><code>.project-card__media</code></td><td class="sg-diff">343×257px</td><td class="sg-diff">231×173px</td><td><code>_projects.scss:9</code></td></tr>
+        <tr><td>Head</td><td colspan="2"><code>.heading-lg</code> + <code>.btn--dark</code> stacked (<code>flex-col items-start gap-4</code>); margin-bottom 40px → 56px</td><td><code>_projects.scss:5</code></td></tr>
+        <tr><td>Hover</td><td colspan="2">image <code>scale(1.05)</code>, 0.6s <code>cubic-bezier(0.65,0,0.35,1)</code></td><td><code>_projects.scss:22</code></td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<section class="sg-section" id="sg-instagram">
+  <div class="sg-wrap">
+    <h2>Instagram block</h2>
+    <p class="sg-lead"><code>section.section.section--cream.instagram</code>. The feed is an external Elfsight widget (<code>elfsightcdn.com/platform.js</code>). The style guide doesn't load it, so its markup and styles are not documented here.</p>
+  </div>
+  <section class="section section--cream instagram" aria-label="Instagram (example)">
+    <div class="container">
+      <div class="instagram__head flex flex-wrap items-end justify-between gap-8">
+        <div>
+          <div class="eyebrow inline-flex items-center">Instagram</div>
+          <h2 class="heading-lg">Follow us <strong>@bbg_electrical</strong></h2>
+        </div>
+        <a href="https://www.instagram.com/bbg_electrical/" class="btn btn--dark inline-flex items-center" target="_blank" rel="noopener">
+          Follow on Instagram
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg>
+        </a>
+      </div>
+      <div class="instagram__feed">
+        <div class="sg-placeholder">Documentation placeholder: the Elfsight feed renders here on index.html (<code>.instagram__feed</code>: width 100%, overflow hidden)</div>
+      </div>
+    </div>
+  </section>
+  <div class="sg-wrap">
+    <span class="sg-note">Head layout: <code>flex flex-wrap items-end justify-between gap-8</code>. At 390px the button wraps below the heading; at 1440px they sit on one row, aligned to the bottom.</span>
+    <span class="sg-flag"><strong>Resolved:</strong> the handle on index.html was changed from <code>@bbg_electrical_pty_ltd</code> to <code>@bbg_electrical</code>, in the heading text and both Instagram links, as you requested. The long handle had made the page about 5px wider than the screen at 390px.</span>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<section class="sg-section" id="sg-contact">
+  <div class="sg-wrap">
+    <h2>Contact block</h2>
+    <p class="sg-lead"><code>section.section#contact</code>: eyebrow, heading, then <code>.contact-grid</code> (contact info + form). The <code>js-reveal</code> classes are left off here.</p>
+  </div>
+  <section class="section" aria-label="Contact (example)">
+    <div class="container">
+      <div class="eyebrow inline-flex items-center">Get in touch</div>
+      <h2 class="heading-lg">Let's talk about <strong>your project</strong></h2>
+      <div class="contact-grid" style="margin-top:2.5rem">
+        <div>
+          <div class="contact-info__item"><span>Phone</span><strong>0413 681 506</strong></div>
+          <div class="contact-info__item"><span>Email</span><strong>info@bbgelectrical.com.au</strong></div>
+          <div class="contact-info__item"><span>Service area</span><strong>[PLACEHOLDER — add your service area]</strong></div>
+        </div>
+        <form action="#" onsubmit="return false">
+          <div class="form-row">
+            <div class="form-field"><label for="sg-c-name">Name</label><input type="text" id="sg-c-name"></div>
+            <div class="form-field"><label for="sg-c-phone">Phone</label><input type="tel" id="sg-c-phone"></div>
+          </div>
+          <div class="form-field"><label for="sg-c-email">Email</label><input type="email" id="sg-c-email"></div>
+          <div class="form-field"><label for="sg-c-message">Tell us about the job</label><textarea id="sg-c-message"></textarea></div>
+          <button type="button" class="btn btn--dark inline-flex items-center">
+            Send enquiry
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg>
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+  <div class="sg-wrap">
+    <div class="sg-table-wrap"><table class="sg-table">
+      <thead><tr><th>Part</th><th>Mobile (390px)</th><th>Desktop (1440px)</th><th>Source</th></tr></thead>
+      <tbody>
+        <tr><td><code>.contact-grid</code></td><td class="sg-diff">1 column (≤960px), info above form, 40px gap</td><td class="sg-diff">2 columns (594px each), 80px gap</td><td><code>_contact.scss:4</code></td></tr>
+        <tr><td><code>.contact-info__item</code></td><td colspan="2">padding 1.6rem 0; border-top 1px #e2ddd3; the last item also has a border-bottom</td><td><code>_contact.scss:10-17</code></td></tr>
+        <tr><td><code>.form-row</code></td><td class="sg-diff">1 column (≤640px)</td><td class="sg-diff">2 columns, gap 1.1rem</td><td><code>_contact.scss:35</code></td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<section class="sg-section" id="sg-footer">
+  <div class="sg-wrap">
+    <h2>Footer</h2>
+    <p class="sg-lead"><code>footer.site-footer</code>. Below 641px the column headings become an accordion. main.js toggles <code>.footer-col.is-open</code> on click; the CSS collapse only applies at ≤640px.</p>
+    <span class="sg-label">Default state</span>
+  </div>
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <img src="/assets/img/logo.png" alt="BBG Electrical">
+          <p>Commercial electrical fitouts, switchboards and maintenance, done properly the first time.</p>
+        </div>
+        <div class="footer-col">
+          <h4 class="flex items-center justify-between">Services <span class="footer-col__chevron"></span></h4>
+          <ul>
+            <li><a href="index.html#services">Commercial Fitouts</a></li>
+            <li><a href="index.html#services">Switchboards &amp; Distribution</a></li>
+            <li><a href="index.html#services">Workshops &amp; Showrooms</a></li>
+            <li><a href="index.html#services">Maintenance</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4 class="flex items-center justify-between">Quick Links <span class="footer-col__chevron"></span></h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4 class="flex items-center justify-between">Contact Us <span class="footer-col__chevron"></span></h4>
+          <ul>
+            <li>Phone: 0413 681 506</li>
+            <li>Email: info@bbgelectrical.com.au</li>
+            <li>[PLACEHOLDER — add your address]</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-social flex items-center">
+        <a class="icon-circle inline-flex items-center justify-center" href="#" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M15 8h2V5h-2a4 4 0 00-4 4v2H9v3h2v7h3v-7h2.5l.5-3H14V9a1 1 0 011-1z"/></svg>
+        </a>
+        <a class="icon-circle inline-flex items-center justify-center" href="https://www.instagram.com/bbg_electrical/" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg>
+        </a>
+        <a class="icon-circle inline-flex items-center justify-center" href="#" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M7 10v7M7 7v.01M11 17v-4.5a2.5 2.5 0 015 0V17M11 10v7"/></svg>
+        </a>
+      </div>
+      <div class="footer-note flex flex-wrap justify-between gap-3">
+        <span>Copyright &copy; <span id="sgYear"></span> BBG Electrical. All rights reserved.</span>
+        <span>Licensed Electrical Contractors, NSW [PLACEHOLDER — licence number]</span>
+      </div>
+    </div>
+  </footer>
+  <div class="sg-wrap">
+    <span class="sg-label">State: first column <code>.footer-col.is-open</code>. Only differs from the default at ≤640px: the chevron rotates and the list expands</span>
+  </div>
+  <div class="site-footer" style="padding-top:2rem;padding-bottom:0">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-col is-open">
+          <h4 class="flex items-center justify-between">Services <span class="footer-col__chevron"></span></h4>
+          <ul>
+            <li><a href="index.html#services">Commercial Fitouts</a></li>
+            <li><a href="index.html#services">Switchboards &amp; Distribution</a></li>
+            <li><a href="index.html#services">Workshops &amp; Showrooms</a></li>
+            <li><a href="index.html#services">Maintenance</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="sg-wrap">
+    <span class="sg-note">The open-state example uses a <code>div.site-footer</code> with inline padding overrides, so only one column shows.</span>
+    <div class="sg-table-wrap"><table class="sg-table">
+      <thead><tr><th>Part</th><th>Mobile (≤640px; 390px)</th><th>Desktop (1440px)</th><th>Source</th></tr></thead>
+      <tbody>
+        <tr><td><code>.site-footer</code></td><td class="sg-diff">padding 56px 0 32px</td><td class="sg-diff">padding 88px 0 32px (<code>clamp(3.5rem, 7vw, 5.5rem) 0 2rem</code>)</td><td><code>_footer.scss:4</code></td></tr>
+        <tr><td><code>.footer-top</code></td><td class="sg-diff">1 column</td><td class="sg-diff"><code>1.3fr 1fr 1fr 1fr</code> (347 / 267 / 267 / 267px); 641-960px: 2 columns, brand spans both</td><td><code>_footer.scss:10</code>, <code>_responsive.scss</code></td></tr>
+        <tr><td><code>.footer-col h4</code></td><td class="sg-diff">padding 1rem 0; border-top 1px rgba(255,255,255,.1); margin-bottom 0; chevron shown (10×10, 1.5px borders, rotate 45° → 225° when open)</td><td class="sg-diff">margin-bottom 1.3rem; chevron <code>display: none</code></td><td><code>_footer.scss:27-38</code>, <code>_responsive.scss</code></td></tr>
+        <tr><td><code>.footer-col ul</code></td><td class="sg-diff">collapsed: max-height 0, overflow hidden → <code>.is-open</code>: max-height 400px, padding-bottom 1rem (0.4s)</td><td class="sg-diff">always visible; <code>li + li</code> margin-top 0.75rem</td><td><code>_responsive.scss</code>, <code>_footer.scss:39</code></td></tr>
+        <tr><td><code>.footer-social</code></td><td colspan="2">flex, centred vertically; gap 0.9rem; padding 2rem 0; border-top 1px rgba(255,255,255,.1)</td><td><code>_footer.scss:57</code></td></tr>
+        <tr><td><code>.footer-note</code></td><td class="sg-diff">wraps onto 2 lines (gap 12px)</td><td class="sg-diff">one line, <code>justify-between</code></td><td><code>_footer.scss:69</code></td></tr>
+        <tr><td><code>.footer-col a:hover</code></td><td colspan="2">colour #fff (transition 0.4s)</td><td><code>_footer.scss:46</code></td></tr>
+      </tbody>
+    </table></div>
+    <span class="sg-note"><code>.footer-col h4</code> has <code>cursor: default</code> at all widths, including mobile, where it's clickable.</span>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<section class="sg-section" id="sg-motion">
+  <div class="sg-wrap">
+    <h2>Motion &amp; JS-driven states</h2>
+    <div class="sg-table-wrap"><table class="sg-table">
+      <thead><tr><th>Item</th><th>Implementation</th><th>Source</th></tr></thead>
+      <tbody>
+        <tr><td>Default transition</td><td><code>$speed: 0.4s</code>, <code>$ease: cubic-bezier(0.65, 0, 0.35, 1)</code>. Used by buttons, header, nav links, footer links, form fields.</td><td><code>_variables.scss:35-36</code></td></tr>
+        <tr><td>Image hover zoom</td><td><code>transform 0.6s $ease</code>; <code>.feature-card</code> and <code>.project-card</code> both <code>scale(1.05)</code></td><td><code>_features.scss</code>, <code>_projects.scss</code></td></tr>
+        <tr><td><code>.js-reveal</code></td><td>Initial: opacity 0, <code>translateY(28px)</code>. <code>.is-visible</code>: opacity 1, <code>translateY(0)</code>. Only <b>opacity</b> is transitioned (700ms ease-in-out); the transform transition line is commented out, so the 28px shift jumps instantly. main.js adds <code>.is-visible</code> when 15% of the element is in view (rootMargin <code>0 0 -40px 0</code>). Each element gets a stagger delay of <code>(index % 4) × 60ms</code>.</td><td><code>_base.scss:134-145</code>, <code>main.js</code></td></tr>
+        <tr><td><code>.site-header.is-scrolled</code></td><td>Added when <code>window.scrollY &gt; 40</code></td><td><code>main.js</code></td></tr>
+        <tr><td><code>.menu-open</code> / <code>.nav-overlay.is-open</code></td><td>Toggled by the hamburger. Closed by <code>.nav-close</code>, any overlay link, or Escape. Sets <code>body</code> overflow hidden while open.</td><td><code>main.js</code></td></tr>
+        <tr><td><code>.footer-col.is-open</code></td><td>Toggled by clicking a column <code>h4</code>; only one column is open at a time</td><td><code>main.js</code></td></tr>
+      </tbody>
+    </table></div>
+
+    <span class="sg-label">Live: <code>.js-reveal</code> without <code>.is-visible</code> (invisible; the dashed outline marks the element's box) and with <code>.is-visible</code></span>
+    <div class="sg-grid sg-grid--2">
+      <div class="sg-specimen"><div class="sg-box-outline"><div class="js-reveal"><h2 class="heading-lg">Hidden <strong>state</strong></h2></div></div></div>
+      <div class="sg-specimen"><div class="sg-box-outline"><div class="js-reveal is-visible"><h2 class="heading-lg">Visible <strong>state</strong></h2></div></div></div>
+    </div>
+
+    <h3 class="sg-h3">Where <code>js-reveal</code> is applied on index.html</h3>
+    <p class="sg-p"><code>.split__content</code> (services text) · 2nd and 3rd <code>.feature-card</code> · <code>.projects-head</code> · <code>.instagram__head</code> (contains the Instagram <code>.eyebrow</code> and heading) · contact <code>.eyebrow</code> · contact <code>h2.heading-lg</code> · contact info column · contact <code>form</code>.</p>
+    <span class="sg-flag"><strong>Inconsistent usage (you confirmed it's unintentional):</strong> <code>js-reveal</code> sits on different levels for equivalent elements. The Instagram eyebrow and heading reveal with their parent <code>.instagram__head</code>; the contact eyebrow and heading each carry <code>js-reveal</code> themselves. The first feature card has none (see <a href="#sg-services">Services</a>). <code>.eyebrow</code> is documented as one component with no reveal behaviour of its own.</span>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<section class="sg-section" id="sg-issues">
+  <div class="sg-wrap">
+    <h2>Inconsistencies &amp; decisions</h2>
+    <div class="sg-table-wrap"><table class="sg-table">
+      <thead><tr><th>Topic</th><th>What the code does</th><th>Decision</th></tr></thead>
+      <tbody>
+        <tr><td>Button height</td><td><code>&lt;a&gt;</code> 58.7px; <code>&lt;button&gt;</code> 52.6px (browser line-height); <code>.btn-row</code> dark button 60.7px (stretched)</td><td>58.7px <code>&lt;a&gt;</code> is the reference; the others are documented deviations. Source unchanged.</td></tr>
+        <tr><td>Feature-card reveal &amp; width</td><td>1st card has no <code>js-reveal</code>; widths follow content</td><td>Unintentional. Documented as one component with flagged differences. Source unchanged.</td></tr>
+        <tr><td>Uppercase label letter-spacing</td><td>0.1em vs 0.08em</td><td>Reference 0.1rem (1.6px); both rules deviate. Source unchanged.</td></tr>
+        <tr><td>Footer list text size</td><td>links 0.95rem; plain Contact Us items 16px (inherited)</td><td>0.95rem is the reference; Contact Us items deviate. Source unchanged.</td></tr>
+        <tr><td>Eyebrow / heading reveal level</td><td>Revealed via parent (Instagram) vs own class (Contact)</td><td>Unintentional. <code>.eyebrow</code> is documented as one component. Source unchanged.</td></tr>
+        <tr><td>Instagram handle overflow</td><td>Unbreakable <code>@bbg_electrical_pty_ltd</code> overflowed at 390px</td><td><b>Changed in index.html</b> to <code>@bbg_electrical</code> (text + both links), as you requested.</td></tr>
+        <tr><td><code>.btn-row</code> overflow</td><td><code>flex-nowrap</code> overflowed at ≤360px</td><td><b>Changed in index.html</b> to <code>flex-wrap</code>: wraps onto a second, left-aligned row, as you requested.</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<section class="sg-section" id="sg-previews">
+  <div class="sg-wrap">
+    <h2>Responsive previews of index.html</h2>
+    <p class="sg-lead">The real homepage, loaded in frames at fixed widths, so its media queries respond to those widths. The desktop frame renders at 1440×900 and is scaled to 50%. Scroll inside each frame.</p>
+    <div class="sg-previews">
+      <div class="sg-preview">
+        <div class="sg-preview__label"><span class="sg-bp">Mobile</span> 390 × 760</div>
+        <div class="sg-preview__vp sg-preview__vp--mobile"><iframe src="/index.html" title="index.html at 390px" loading="lazy"></iframe></div>
+      </div>
+      <div class="sg-preview">
+        <div class="sg-preview__label"><span class="sg-bp">Desktop</span> 1440 × 900 (shown at 50%)</div>
+        <div class="sg-preview__vp sg-preview__vp--desktop"><iframe src="/index.html" title="index.html at 1440px" loading="lazy"></iframe></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="sg-section" style="border-bottom:0">
+  <div class="sg-wrap"><p class="sg-p">Generated from the implementation of <code>index.html</code>. Doc-only styles live inline in <code>styleguide.html</code> (<code>.sg-*</code>). The site's styles load unchanged via <code>src/styleguide.js</code>.</p></div>
+</footer>
+
+<script>
+  // Documentation helpers only (no site behaviour is reproduced).
+  (function () {
+    var vw = document.getElementById("sgVw");
+    function update() { if (vw) vw.textContent = window.innerWidth + " × " + window.innerHeight + " px"; }
+    window.addEventListener("resize", update); update();
+    var y = document.getElementById("sgYear");
+    if (y) y.textContent = new Date().getFullYear();
+  })();
+</script>
+</body>
+</html>
