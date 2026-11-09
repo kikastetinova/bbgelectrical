@@ -1,28 +1,9 @@
 // ---------------------------------------------
-// Projects horizontal carousel
+// Projects (grid layout is Tailwind in the markup:
+// one column on mobile, five in a row from the lg breakpoint)
 // ---------------------------------------------
 .projects-head {
   margin-bottom: clamp(2.5rem, 5vw, 3.5rem);
-}
-
-.projects-track {
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  padding-bottom: 1rem;
-  padding-left: $container-pad;
-  padding-right: $container-pad;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-.projects-track::-webkit-scrollbar {
-  display: none;
-}
-
-.project-card {
-  flex: 0 0 clamp(260px, 32vw, 400px);
-  scroll-snap-align: start;
 }
 
 .project-card__media {

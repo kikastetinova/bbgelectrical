@@ -93,35 +93,6 @@ import "./styles/main.scss";
     });
   }
 
-  /* ---------- Projects horizontal carousel ---------- */
-  var track = document.getElementById("projectsTrack");
-  var prevBtn = document.getElementById("projPrev");
-  var nextBtn = document.getElementById("projNext");
-
-  function scrollByCard(direction) {
-    if (!track) return;
-    var card = track.querySelector(".project-card");
-    var gap = 28; // matches $ 1.75rem gap in _projects.scss
-    var amount = card ? card.getBoundingClientRect().width + gap : 320;
-    track.scrollBy({ left: direction * amount, behavior: "smooth" });
-  }
-
-  if (prevBtn) prevBtn.addEventListener("click", function () { scrollByCard(-1); });
-  if (nextBtn) nextBtn.addEventListener("click", function () { scrollByCard(1); });
-
-  function updateArrows() {
-    if (!track || !prevBtn || !nextBtn) return;
-    var max = track.scrollWidth - track.clientWidth - 4;
-    prevBtn.disabled = track.scrollLeft <= 4;
-    nextBtn.disabled = track.scrollLeft >= max;
-  }
-
-  if (track) {
-    track.addEventListener("scroll", updateArrows, { passive: true });
-    window.addEventListener("resize", updateArrows);
-    updateArrows();
-  }
-
   /* ---------- Footer accordion (mobile only, CSS handles the collapse) ---------- */
   document.querySelectorAll(".footer-col > h4").forEach(function (h4) {
     h4.addEventListener("click", function () {
