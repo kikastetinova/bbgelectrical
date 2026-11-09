@@ -134,7 +134,8 @@ h1, h2, h3, h4 {
 .js-reveal {
   opacity: 0;
   transform: translateY(28px);
-  transition: opacity 0.8s $ease, transform 0.8s $ease;
+  //transition: opacity 0.7s $ease, transform 0.8s $ease;
+  transition: opacity 700ms ease-in-out;
 }
 
 .js-reveal.is-visible {
