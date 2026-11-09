@@ -1,6 +1,6 @@
 // ---------------------------------------------
 // Projects (grid layout is Tailwind in the markup:
-// one column on mobile, five in a row from the lg breakpoint)
+// one column on xs/sm, five in a row from the md breakpoint, 768px)
 // ---------------------------------------------
 .projects-head {
   margin-bottom: clamp(2.5rem, 5vw, 3.5rem);
