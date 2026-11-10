@@ -15,4 +15,5 @@
 @source "../index.html";
 @source "../projects.html";
 @source "../projects/*.html";
+@source "../services.html";
 @source "./main.js";

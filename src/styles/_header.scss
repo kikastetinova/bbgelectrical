@@ -238,6 +238,16 @@
   padding-left: 0.5rem;
 }
 
+// Current page (aria-current="page"): reuses the existing hover treatments,
+// the underline in the main nav and the white link in the overlay.
+.main-nav__list a[aria-current="page"]::after {
+  transform: scaleX(1);
+}
+
+.nav-overlay__links a[aria-current="page"] {
+  color: $color-white;
+}
+
 .nav-overlay__meta {
   color: rgba(255, 255, 255, 0.55);
   font-size: 0.95rem;

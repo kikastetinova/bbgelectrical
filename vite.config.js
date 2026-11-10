@@ -41,6 +41,7 @@ export default defineConfig({
       input: {
         main: resolve(import.meta.dirname, "index.html"),
         projects: resolve(import.meta.dirname, "projects.html"),
+        services: resolve(import.meta.dirname, "services.html"),
         projectNewBuildMatraville: resolve(import.meta.dirname, "projects/new-build-matraville.html"),
       },
     },

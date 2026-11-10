@@ -1,0 +1,85 @@
+// ---------------------------------------------
+// Services page (services.html)
+// Every selector is scoped to .page-services (body class) or to blocks that
+// only exist on that page, so other pages are unaffected. Values are reused
+// from existing rules where noted.
+// ---------------------------------------------
+
+// Title area below the fixed header: same top padding as the project pages
+// (.page-banner value). The heading's own spacing (.projects-head margin)
+// leads into the first service section, which starts without top padding.
+.page-services .page-top {
+  padding-top: clamp(9rem, 16vw, 12rem);
+  padding-bottom: 0;
+}
+
+.page-services .page-top + .section {
+  padding-top: 0;
+}
+
+// ---------- Service sections ----------
+// Heading spacing = .projects-head margin-bottom.
+.service-row__head {
+  margin-bottom: clamp(2.5rem, 5vw, 3.5rem);
+}
+
+// Image | text, same column split and gap as .contact-grid / .project-detail,
+// stacked at <=960px in source order (image, then text).
+.service-row__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2.5rem, 6vw, 5rem);
+  align-items: center;
+}
+
+// The grid gap spaces image and text, so drop .lede's margin-top here
+// (otherwise the text sits off-centre beside the image).
+.service-row__grid .lede {
+  margin-top: 0;
+}
+
+// ---------- "Our Electrical Services" list ----------
+// Two equal columns filled top to bottom (5 rows for the 10 items), so both
+// columns hold the same number of rows. Dividers match the project detail
+// page's .contact-info__item: 1px solid $color-border.
+.services-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(5, auto);
+  grid-auto-flow: column;
+  column-gap: clamp(2.5rem, 6vw, 5rem);
+}
+
+.services-list li {
+  padding: 1.6rem 0; // .contact-info__item padding
+  border-bottom: 1px solid $color-border;
+  font-size: 1.05rem; // .lede size
+  font-weight: 500;
+  color: $color-heading;
+}
+
+// Top divider on the first row of each column.
+.services-list li:nth-child(1),
+.services-list li:nth-child(6) {
+  border-top: 1px solid $color-border;
+}
+
+@media (max-width: 960px) {
+  .service-row__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .services-list {
+    grid-template-columns: 1fr;
+    grid-template-rows: none;
+    grid-auto-flow: row;
+  }
+
+  // Single column: the 6th item follows the 5th, whose bottom divider
+  // already separates them.
+  .services-list li:nth-child(6) {
+    border-top: 0;
+  }
+}
