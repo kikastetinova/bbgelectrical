@@ -5,6 +5,12 @@
 // from existing rules where noted.
 // ---------------------------------------------
 
+// Pure white page background on this page only (other pages keep $color-bg).
+// The "Our Electrical Services" list keeps its .section--cream band.
+body.page-services {
+  background: $color-white;
+}
+
 // Title area below the fixed header: same top padding as the project pages
 // (.page-banner value). The heading's own spacing (.projects-head margin)
 // leads into the first service section, which starts without top padding.
@@ -23,8 +29,11 @@
   margin-bottom: clamp(2.5rem, 5vw, 3.5rem);
 }
 
-// Image | text, same column split and gap as .contact-grid / .project-detail,
-// stacked at <=960px in source order (image, then text).
+// Image | text, same column split and gap as .contact-grid. Like
+// .project-detail, the grid spans the full viewport: the image runs flush to
+// the viewport edge and the text column keeps the container padding on its
+// outer side, so it lines up with the page title. Stacked at <=960px in
+// source order: image, then heading + text.
 .service-row__grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -32,8 +41,22 @@
   align-items: center;
 }
 
-// The grid gap spaces image and text, so drop .lede's margin-top here
-// (otherwise the text sits off-centre beside the image).
+.service-row__text {
+  padding-right: calc(max(0px, (100vw - #{$container-width}) / 2) + #{$container-pad});
+}
+
+// Reversed row (Commercial): text left, image flush to the right edge.
+.service-row--reverse .service-row__media {
+  order: 2;
+}
+
+.service-row--reverse .service-row__text {
+  padding-right: 0;
+  padding-left: calc(max(0px, (100vw - #{$container-width}) / 2) + #{$container-pad});
+}
+
+// The heading's margin spaces it from the text, so drop .lede's margin-top
+// here (as before, when the heading sat above the grid).
 .service-row__grid .lede {
   margin-top: 0;
 }
@@ -67,6 +90,22 @@
 @media (max-width: 960px) {
   .service-row__grid {
     grid-template-columns: 1fr;
+  }
+
+  // Full-width image at 4:3 instead of .feature-card__media's fixed 500px.
+  .service-row__media {
+    height: auto;
+    aspect-ratio: 4 / 3;
+  }
+
+  // Image first in every row (including the reversed one).
+  .service-row--reverse .service-row__media {
+    order: 0;
+  }
+
+  .service-row__text,
+  .service-row--reverse .service-row__text {
+    padding: 0 $container-pad;
   }
 }
 
