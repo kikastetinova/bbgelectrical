@@ -55,6 +55,17 @@ body.page-services {
   padding-left: calc(max(0px, (100vw - #{$container-width}) / 2) + #{$container-pad});
 }
 
+// No white band between consecutive service rows: they sit directly on top of
+// each other. The space after the title (first row) and before the
+// Electrical Services list (last row's bottom padding) is kept.
+.service-row + .service-row {
+  padding-top: 0;
+}
+
+.service-row:has(+ .service-row) {
+  padding-bottom: 0;
+}
+
 // The heading's margin spaces it from the text, so drop .lede's margin-top
 // here (as before, when the heading sat above the grid).
 .service-row__grid .lede {
