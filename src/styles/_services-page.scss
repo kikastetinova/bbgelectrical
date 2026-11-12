@@ -15,7 +15,7 @@ body.page-services {
 // (.page-banner value). The heading's own spacing (.projects-head margin)
 // leads into the first service section, which starts without top padding.
 .page-services .page-top {
-  padding-top: clamp(9rem, 16vw, 12rem);
+  padding-top: clamp(9rem, 16vw, 14rem);
   padding-bottom: 0;
 }
 
@@ -25,9 +25,9 @@ body.page-services {
 
 // ---------- Service sections ----------
 // Heading spacing = .projects-head margin-bottom.
-.service-row__head {
-  margin-bottom: clamp(2.5rem, 5vw, 3.5rem);
-}
+// .service-row__head {
+//   margin-bottom: clamp(2.5rem, 5vw, 3.5rem);
+// }
 
 // Image | text, same column split and gap as .contact-grid. Like
 // .project-detail, the grid spans the full viewport: the image runs flush to
@@ -66,12 +66,6 @@ body.page-services {
   padding-bottom: 0;
 }
 
-// The heading's margin spaces it from the text, so drop .lede's margin-top
-// here (as before, when the heading sat above the grid).
-.service-row__grid .lede {
-  margin-top: 0;
-}
-
 // ---------- "Our Electrical Services" list ----------
 // Two equal columns filled top to bottom (5 rows for the 10 items), so both
 // columns hold the same number of rows. Dividers match the project detail
@@ -96,6 +90,10 @@ body.page-services {
 .services-list li:nth-child(1),
 .services-list li:nth-child(6) {
   border-top: 1px solid $color-border;
+}
+
+.service-row__media {
+  height: 500px;
 }
 
 @media (max-width: 960px) {

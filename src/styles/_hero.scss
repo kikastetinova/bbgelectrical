@@ -27,8 +27,9 @@
   color: $color-white;
   font-size: clamp(2.6rem, 6.5vw, 4rem);
   font-weight: 600;
-  max-width: 16ch;
-  line-height: 1.08;
+  max-width: 18ch;
+  line-height: 1;
+  margin-top: clamp(3rem, 13rem, 14rem);
 }
 
 .hero__tags {
