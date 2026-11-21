@@ -33,7 +33,13 @@ a {
 }
 
 ul {
+  padding: 0;
   list-style: none;
+}
+
+li {
+  line-height: 2rem;
+  padding-left: 1rem;
 }
 
 button {
@@ -94,8 +100,16 @@ h1, h2, h3, h4 {
 
 .heading-lg {
   text-transform: uppercase;
-  letter-spacing: 0.04em;
   font-size: clamp(1.9rem, 4vw, 4.8rem);
+  font-weight: 400;
+}
+
+.heading-lg strong {
+  font-weight: 700;
+}
+
+.heading-md {
+  font-size: clamp(1.6rem, 3.2vw, 4rem);
   font-weight: 400;
 }
 
@@ -109,6 +123,12 @@ h1, h2, h3, h4 {
   max-width: 46ch;
   margin-top: 1.4rem;
   line-height: 1.4;
+}
+
+@media (max-width: 960px) {
+  .lede {
+    max-width: 100%;
+  }
 }
 
 .script {

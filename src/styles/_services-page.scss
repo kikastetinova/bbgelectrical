@@ -39,10 +39,12 @@ body.page-services {
   grid-template-columns: 1fr 1fr;
   gap: clamp(2.5rem, 6vw, 5rem);
   align-items: center;
+  justify-content: space-between;
 }
 
 .service-row__text {
-  padding-right: calc(max(0px, (100vw - #{$container-width}) / 2) + #{$container-pad});
+  flex: 1;
+  padding: calc(max(0px, (100vw - #{$container-width}) / 2) + 4vw);
 }
 
 // Reversed row (Commercial): text left, image flush to the right edge.
@@ -50,20 +52,20 @@ body.page-services {
   order: 2;
 }
 
-.service-row--reverse .service-row__text {
-  padding-right: 0;
-  padding-left: calc(max(0px, (100vw - #{$container-width}) / 2) + #{$container-pad});
+.service-row__text ul {
+  padding-top: clamp(1.5rem, 3vw, 2rem);
 }
+
+// .service-row--reverse .service-row__text {
+//   padding-right: 0;
+//   padding-left: 0 calc(max(0px, (100vw - #{$container-width}) / 2) + 4vw);
+// }
 
 // No white band between consecutive service rows: they sit directly on top of
 // each other. The space after the title (first row) and before the
 // Electrical Services list (last row's bottom padding) is kept.
-.service-row + .service-row {
-  padding-top: 0;
-}
-
-.service-row:has(+ .service-row) {
-  padding-bottom: 0;
+.service-row {
+  padding-top: 0rem;
 }
 
 // ---------- "Our Electrical Services" list ----------
@@ -93,18 +95,22 @@ body.page-services {
 }
 
 .service-row__media {
-  height: 500px;
+  height: 670px;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 
 @media (max-width: 960px) {
   .service-row__grid {
-    grid-template-columns: 1fr;
+    flex-direction: column;
   }
 
   // Full-width image at 4:3 instead of .feature-card__media's fixed 500px.
   .service-row__media {
-    height: auto;
+    height: 250px;
     aspect-ratio: 4 / 3;
+    width: 100%;
   }
 
   // Image first in every row (including the reversed one).
