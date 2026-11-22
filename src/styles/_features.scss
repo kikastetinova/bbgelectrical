@@ -29,8 +29,19 @@
   margin-top: clamp(3rem, 6vw, 4.5rem);
 }
 
+.feature-card {
+  flex: 1;
+}
+
+@media (min-width: 1200px) {
+  .feature-card:nth-child(1) .feature-card__media {
+    border-radius: 0 $radius-lg 0 0;
+  }
+}
+
+
 .feature-card__media {
-  height: 400px;
+  height: 52ch;
   overflow: hidden;
   // border-radius: $radius-md;
 }

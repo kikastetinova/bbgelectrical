@@ -109,8 +109,8 @@ h1, h2, h3, h4 {
 }
 
 .heading-md {
-  font-size: clamp(1.6rem, 3.2vw, 4rem);
-  font-weight: 400;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-weight: 700;
 }
 
 .heading-lg strong {
@@ -140,16 +140,22 @@ h1, h2, h3, h4 {
 
 .section {
   position: relative;
-  padding: clamp(4rem, 9vw, 7.5rem) 0;
+  padding: 5rem 0;
 }
 
-.section--cream {
-  background: $color-bg-cream;
+@media (max-width: 960px) {
+  .section {
+    padding: 3rem 0;
+  }
+}
+
+.section--accent {
+  background: $color-accent;
 }
 
 .section--dark {
-  background: $color-dark;
-  color: rgba(255, 255, 255, 0.72);
+  background: $color-darkest;
+  color: $color-white;
 }
 
 // Reveal-on-scroll (mimics AOS fade-up, done with a tiny vanilla-JS

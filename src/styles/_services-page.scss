@@ -6,7 +6,7 @@
 // ---------------------------------------------
 
 // Pure white page background on this page only (other pages keep $color-bg).
-// The "Our Electrical Services" list keeps its .section--cream band.
+// The "Our Electrical Services" list keeps its .section--accent band.
 body.page-services {
   background: $color-white;
 }
@@ -68,16 +68,18 @@ body.page-services {
   padding-top: 0rem;
 }
 
-.service-row:nth-child(1) .feature-card__media {
-  border-radius: 0 0 $radius-lg 0;
-}
+@media (min-width: 961px) {
+  .service-row:nth-child(1) .feature-card__media {
+    border-radius: 0 0 $radius-lg 0;
+  }
 
-.service-row:nth-child(2) .feature-card__media {
-  border-radius: $radius-lg 0 0 $radius-lg;
-}
+  .service-row:nth-child(2) .feature-card__media {
+    border-radius: $radius-lg 0 0 $radius-lg;
+  }
 
-.service-row:nth-child(3) .feature-card__media {
-  border-radius: 0 $radius-lg 0 0;
+  .service-row:nth-child(3) .feature-card__media {
+    border-radius: 0 $radius-lg 0 0;
+  }
 }
 
 
@@ -99,12 +101,13 @@ body.page-services {
   line-height: 1.3;
   font-weight: 750;
   letter-spacing: 0.14em;
-  color: #a37358;
+  color: $color-accent-2;
 }
 
 .service-row__title {
   margin: 0 0 18px;
   font-size: clamp(32px, 4vw, 54px);
+  font-weight: 700;
 }
 
 .service-row__body {
@@ -140,7 +143,7 @@ body.page-services {
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background: #a37358;
+  background: $color-accent-2;
 }
 
 @media (width >= 701px) and (width < 960px) {

@@ -151,7 +151,7 @@
     <p class="sg-lead">Sass variables from <code>src/styles/_variables.scss:8-18</code>, with the homepage selectors that use each one.</p>
     <div class="sg-grid sg-grid--swatches">
       <div class="sg-swatch"><div class="sg-swatch__chip" style="background:#f9f9f9"></div><div class="sg-swatch__body"><b>$color-bg</b><span class="sg-mono">#f9f9f9</span><span><code>body</code> background. <code>.site-header.is-scrolled</code> uses it at 92% opacity.</span></div></div>
-      <div class="sg-swatch"><div class="sg-swatch__chip" style="background:#f4f1ec"></div><div class="sg-swatch__body"><b>$color-bg-cream</b><span class="sg-mono">#f4f1ec</span><span><code>.section--cream</code> (brands, Instagram)</span></div></div>
+      <div class="sg-swatch"><div class="sg-swatch__chip" style="background:#f4f1ec"></div><div class="sg-swatch__body"><b>$color-bg-cream</b><span class="sg-mono">#f4f1ec</span><span><code>.section--accent</code> (brands, Instagram)</span></div></div>
       <div class="sg-swatch"><div class="sg-swatch__chip" style="background:#1c1c1c"></div><div class="sg-swatch__body"><b>$color-dark</b><span class="sg-mono">#1c1c1c</span><span><code>.btn--dark</code> bg, <code>.nav-overlay</code> bg, scrolled header link/phone/hamburger colour, <code>.nav-close:hover</code> text</span></div></div>
       <div class="sg-swatch"><div class="sg-swatch__chip" style="background:#212121"></div><div class="sg-swatch__body"><b>$color-dark-soft</b><span class="sg-mono">#212121</span><span><code>.site-footer</code> background</span></div></div>
       <div class="sg-swatch"><div class="sg-swatch__chip" style="background:#232323"></div><div class="sg-swatch__body"><b>$color-heading</b><span class="sg-mono">#232323</span><span><code>h1-h4</code>, <code>.heading-xl</code>, <code>.btn--outline</code> text, form input text, <code>.project-card__title</code>, <code>.contact-info__item strong</code></span></div></div>
@@ -267,7 +267,7 @@
       <tbody>
         <tr><td><code>.container</code></td><td>width 100%; max-width 1600px; margin 0 auto; padding <code>0 6vw</code></td><td class="sg-diff">side padding 23.4px; content 343px</td><td class="sg-diff">side padding 86.4px; content 1267px</td><td><code>_base.scss:57</code></td></tr>
         <tr><td><code>.section</code></td><td>position relative; padding <code>clamp(4rem, 9vw, 7.5rem) 0</code></td><td class="sg-diff">64px top/bottom (minimum up to ≈711px)</td><td class="sg-diff">120px top/bottom (maximum from ≈1334px)</td><td><code>_base.scss:116</code></td></tr>
-        <tr><td><code>.section--cream</code></td><td>background #f4f1ec</td><td colspan="2">Brands and Instagram sections</td><td><code>_base.scss:121</code></td></tr>
+        <tr><td><code>.section--accent</code></td><td>background #f4f1ec</td><td colspan="2">Brands and Instagram sections</td><td><code>_base.scss:121</code></td></tr>
         <tr><td><code>.hero</code></td><td>min-height 100vh; flex; <code>items-end</code>; bg cover/center; overflow hidden. Not a <code>.section</code>.</td><td colspan="2">Full viewport height. Content sits at the bottom with padding-bottom 4.5rem (72px)</td><td><code>_hero.scss:4</code></td></tr>
       </tbody>
     </table></div>
@@ -565,9 +565,9 @@
 <section class="sg-section" id="sg-brands">
   <div class="sg-wrap">
     <h2>Brand logos</h2>
-    <p class="sg-lead"><code>section.section.section--cream.brands</code>. Column at &lt;1200px; centred row at ≥1200px.</p>
+    <p class="sg-lead"><code>section.section.section--accent.brands</code>. Column at &lt;1200px; centred row at ≥1200px.</p>
   </div>
-  <section class="section section--cream brands" aria-label="Brands we install (example)">
+  <section class="section section--accent brands" aria-label="Brands we install (example)">
     <div class="container">
       <ul class="brands__list flex flex-col items-center gap-6 lg:flex-row lg:items-center lg:justify-center lg:gap-8">
         <li class="brands__item"><img class="brands__logo brands__logo--abb" src="/assets/img/brands/abb.svg" alt="ABB logo" width="101" height="40"></li>
@@ -688,9 +688,9 @@
 <section class="sg-section" id="sg-instagram">
   <div class="sg-wrap">
     <h2>Instagram block</h2>
-    <p class="sg-lead"><code>section.section.section--cream.instagram</code>. The feed is an external Elfsight widget (<code>elfsightcdn.com/platform.js</code>). The style guide doesn't load it, so its markup and styles are not documented here.</p>
+    <p class="sg-lead"><code>section.section.section--accent.instagram</code>. The feed is an external Elfsight widget (<code>elfsightcdn.com/platform.js</code>). The style guide doesn't load it, so its markup and styles are not documented here.</p>
   </div>
-  <section class="section section--cream instagram" aria-label="Instagram (example)">
+  <section class="section section--accent instagram" aria-label="Instagram (example)">
     <div class="container">
       <div class="instagram__head flex flex-wrap items-end justify-between gap-8">
         <div>

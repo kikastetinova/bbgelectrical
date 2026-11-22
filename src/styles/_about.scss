@@ -13,6 +13,7 @@
   height: var(--logo-height, 3rem);
   max-width: 100%;
   object-fit: contain;
+  filter: brightness(0) invert(1);
 }
 
 .brands__logo--abb       { --logo-height: 2.5rem; }

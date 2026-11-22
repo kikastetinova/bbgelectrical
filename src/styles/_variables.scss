@@ -6,16 +6,18 @@
 // cream section backgrounds, near-black text/footer, one electrical-amber
 // accent used sparingly for BBG's own identity)
 $color-bg:          #f9f9f9;
-$color-bg-cream:    #f4f1ec;
+$color-bg-cream:    #ecf0f4;
 $color-bg-cream-2:  #efece5;
 $color-dark:        #1c1c1c;
+$color-darkest:     #000000;
 $color-dark-soft:   #212121;
 $color-text:        #4a4a4a;
 $color-text-light:  #6f6f6f;
 $color-heading:     #232323;
 $color-border:      #e2ddd3;
 $color-white:       #ffffff;
-$color-accent:      #d97f2c; // electrical amber, used sparingly
+$color-accent:      #9dc1d0;
+$color-accent-2:    #3bb2e5;
 
 // Type
 $font-body: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -24,7 +26,7 @@ $font-script: "Caveat", cursive;
 // Layout
 $container-width: 1600px;
 $container-pad: 6vw;
-$radius-lg: 80px;
+$radius-lg: 120px;
 $radius-md: 28px;
 $radius-sm: 16px;
 $radius-pill: $radius-sm;
