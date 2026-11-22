@@ -16,7 +16,7 @@ body.page-services {
 // leads into the first service section, which starts without top padding.
 .page-services .page-top {
   padding-top: clamp(9rem, 16vw, 14rem);
-  padding-bottom: 0;
+  padding-bottom: 3rem;
 }
 
 .page-services .page-top + .section {
@@ -67,6 +67,20 @@ body.page-services {
 .service-row {
   padding-top: 0rem;
 }
+
+.service-row:nth-child(1) .feature-card__media {
+  border-radius: 0 0 $radius-lg 0;
+}
+
+.service-row:nth-child(2) .feature-card__media {
+  border-radius: $radius-lg 0 0 $radius-lg;
+}
+
+.service-row:nth-child(3) .feature-card__media {
+  border-radius: 0 $radius-lg 0 0;
+}
+
+
 
 // ---------- Service row text content ----------
 // Extracted from the Tailwind utilities that were on the Residential row, and
@@ -231,12 +245,12 @@ body.page-services {
   .service-row__media,
   .service-row--reverse .service-row__media {
     order: 2;
-    padding: 0 6vw;
+    padding: 0;
   }
 
   .service-row__text,
   .service-row--reverse .service-row__text {
-    padding: 0 $container-pad;
+    padding: 0;
   }
 
   // Space between one row's image and the next row's text, equal to the
