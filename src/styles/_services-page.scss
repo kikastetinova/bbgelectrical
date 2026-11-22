@@ -44,7 +44,7 @@ body.page-services {
 
 .service-row__text {
   flex: 1;
-  padding: calc(max(0px, (100vw - #{$container-width}) / 2) + 4vw);
+  padding-block: 3rem;
 }
 
 // Reversed row (Commercial): text left, image flush to the right edge.
@@ -104,7 +104,7 @@ body.page-services {
 // padding-top comes from the existing `.service-row__text ul` rule above.
 .service-row__list {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: 1fr;
   column-gap: 22px;
   margin: 0;
   list-style: none;
@@ -129,17 +129,22 @@ body.page-services {
   background: #a37358;
 }
 
-@media (width >= 701px) and (width < 1100px) {
+@media (width >= 701px) and (width < 960px) {
   .service-row__title {
-    font-size: 58px;
+    font-size: 40px;
   }
-
-  .service-row__list {
-    grid-template-columns: minmax(0, 1fr);
+  .service-row__item {
+    line-height: 1.4rem;
   }
 }
 
-@media (width < 700px) {
+@media (width >= 701px) {
+  .service-row__list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (width < 640px) {
   .service-row__eyebrow {
     margin-bottom: 18px;
   }
@@ -191,16 +196,22 @@ body.page-services {
 }
 
 .service-row__media {
-  height: 670px;
+  height: 100%;
   width: 100%;
   object-fit: cover;
   object-position: center;
 }
 
 @media (max-width: 960px) {
+
+  .service-row {
+    padding-top: 3rem;
+  }
+
   // Single column: text first, then the image at full viewport width.
   .service-row__grid {
     grid-template-columns: minmax(0, 1fr);
+    gap: 3rem;
   }
 
   // Text spans the full width between the page margins (aligned with the
@@ -220,6 +231,7 @@ body.page-services {
   .service-row__media,
   .service-row--reverse .service-row__media {
     order: 2;
+    padding: 0 6vw;
   }
 
   .service-row__text,
