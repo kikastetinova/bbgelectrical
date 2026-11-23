@@ -8,6 +8,12 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  /* Critical CSS: keep the mobile menu hidden until the main stylesheet has
+     loaded, and never show it at the desktop breakpoint (see _header.scss). */
+  .nav-overlay:not(.is-open) { visibility: hidden; }
+  @media (min-width: 1200px) { .nav-overlay { display: none; } }
+</style>
 </head>
 <body>
 
@@ -29,7 +35,7 @@
         <li><a href="/services">Services</a></li>
         <li><a href="/projects">Projects</a></li>
         <li><a href="/about-us">About Us</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><a href="/contact">Contact</a></li>
       </ul>
     </nav>
     <a href="tel:+61413281359" class="header-phone">0413 281 359</a>
@@ -52,7 +58,7 @@
       <a href="/about-us">About</a>
       <a href="/services">Services</a>
       <a href="/projects">Projects</a>
-      <a href="#contact">Contact</a>
+      <a href="/contact">Contact</a>
     </div>
     <div class="nav-overlay__meta flex flex-wrap gap-12">
       <div>

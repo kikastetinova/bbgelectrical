@@ -272,4 +272,11 @@
   .hamburger {
     display: none;
   }
+
+  // The full-screen menu is mobile-only: never render it on large screens.
+  // Each page also inlines this rule in <head> so it applies before this
+  // stylesheet has loaded (avoids a flash of the menu on first paint).
+  .nav-overlay {
+    display: none;
+  }
 }

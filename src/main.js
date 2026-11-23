@@ -71,6 +71,13 @@ import "./styles/main.scss";
     if (e.key === "Escape") closeNav();
   });
 
+  // The menu is hidden by CSS from 1200px up. If it was open when the window
+  // grows past that, close it too, so its scroll lock on <body> is released.
+  var desktopMq = window.matchMedia("(min-width: 1200px)");
+  desktopMq.addEventListener("change", function (e) {
+    if (e.matches) closeNav();
+  });
+
   /* ---------- Scroll-reveal (mimics AOS fade-up) ---------- */
   var revealEls = document.querySelectorAll(".js-reveal");
   if ("IntersectionObserver" in window && revealEls.length) {
